@@ -1,0 +1,68 @@
+[
+  {
+    "id": "DOS001",
+    "numero_dossier": "LS-2024-001",
+    "statut": "ACTIF",
+    "cledog": "DOS001",
+    "client_id": "CLI001",
+    "client_nom": "Entreprise ABC",
+    "dgen": {
+      "repais": "REP-2024-001",
+      "date_lancement": "2024-01-15",
+      "devise": "EUR",
+      "montant_principal": 50000.00,
+      "duree_mois": 60,
+      "type_pret": "CREDIT",
+      "taux_interet_base": 4.5,
+      "prochaine_echeance": "2024-02-15",
+      "siege_place": "PARIS",
+      "categorie_financement": "CORPORATIF",
+      "date_creation": "2024-01-15",
+      "statut_dossier": "ACTIF"
+    }
+  },
+  {
+    "id": "DOS002",
+    "numero_dossier": "LS-2024-002",
+    "statut": "ACTIF",
+    "cledog": "DOS002",
+    "client_id": "CLI002",
+    "client_nom": "Société XYZ",
+    "dgen": {
+      "repais": "REP-2024-002",
+      "date_lancement": "2024-02-10",
+      "devise": "EUR",
+      "montant_principal": 100000.00,
+      "duree_mois": null,
+      "type_pret": "REVOLVING",
+      "taux_interet_base": 5.2,
+      "prochaine_echeance": "2024-03-15",
+      "siege_place": "LYON",
+      "categorie_financement": "REVOLVING",
+      "date_creation": "2024-02-10",
+      "statut_dossier": "ACTIF"
+    }
+  },
+  {
+    "id": "DOS003",
+    "numero_dossier": "LS-2024-003",
+    "statut": "FERMÉ",
+    "cledog": "DOS003",
+    "client_id": "CLI003",
+    "client_nom": "Commerce DEF",
+    "dgen": {
+      "repais": "REP-2024-003",
+      "date_lancement": "2024-03-05",
+      "devise": "EUR",
+      "montant_principal": 30000.00,
+      "duree_mois": 36,
+      "type_pret": "CREDIT",
+      "taux_interet_base": 3.8,
+      "prochaine_echeance": null,
+      "siege_place": "MARSEILLE",
+      "categorie_financement": "PME",
+      "date_creation": "2024-03-05",
+      "statut_dossier": "FERMÉ"
+    }
+  }
+]

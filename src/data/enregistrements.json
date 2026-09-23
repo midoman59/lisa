@@ -1,0 +1,98 @@
+[
+  {
+    "id": "ENREG001",
+    "dossier_id": "DOS001",
+    "numero_ligne": 1,
+    "statut": "ACTIF",
+    "type_enregistrement": "PRET",
+    "montant_initial": 50000.00,
+    "montant_utilise": 40000.00,
+    "montant_disponible": 10000.00,
+    "taux_interet": 4.5,
+    "date_premiere_echeance": "2024-02-15",
+    "date_derniere_echeance": "2029-02-15",
+    "nombre_echeances_total": 60,
+    "nombre_echeances_restantes": 48,
+    "montant_echeance": 833.33,
+    "dpay": {
+      "numero_payeur": "PAY-2024-001",
+      "mode_paiement": "VIR",
+      "montant_paiement": 833.33,
+      "date_dernier_paiement": "2026-09-20",
+      "reference_compte": "FR1420041010050500013M02606"
+    },
+    "dgar": {
+      "numero_garantie": "GAR-2024-001",
+      "type_garantie": "HYPO",
+      "montant_garantie": 75000.00,
+      "pourcentage_couverture": 150.0,
+      "date_prise_effet": "2024-01-20",
+      "date_expiration": null,
+      "statut_garantie": "VALIDE"
+    }
+  },
+  {
+    "id": "ENREG002",
+    "dossier_id": "DOS002",
+    "numero_ligne": 1,
+    "statut": "ACTIF",
+    "type_enregistrement": "REVOLVING",
+    "montant_initial": 100000.00,
+    "montant_utilise": 25000.00,
+    "montant_disponible": 75000.00,
+    "taux_interet": 5.2,
+    "date_premiere_echeance": "2024-03-15",
+    "date_derniere_echeance": null,
+    "nombre_echeances_total": null,
+    "nombre_echeances_restantes": null,
+    "montant_echeance": null,
+    "dpay": {
+      "numero_payeur": "PAY-2024-002",
+      "mode_paiement": "PRLV",
+      "montant_paiement": 500.00,
+      "date_dernier_paiement": "2026-09-15",
+      "reference_compte": "FR1420041010050500014M02607"
+    },
+    "dgar": {
+      "numero_garantie": "GAR-2024-002",
+      "type_garantie": "NANTISSEMENT",
+      "montant_garantie": 150000.00,
+      "pourcentage_couverture": 150.0,
+      "date_prise_effet": "2024-02-15",
+      "date_expiration": null,
+      "statut_garantie": "VALIDE"
+    }
+  },
+  {
+    "id": "ENREG003",
+    "dossier_id": "DOS003",
+    "numero_ligne": 1,
+    "statut": "CLOTURÉ",
+    "type_enregistrement": "PRET",
+    "montant_initial": 30000.00,
+    "montant_utilise": 30000.00,
+    "montant_disponible": 0.00,
+    "taux_interet": 3.8,
+    "date_premiere_echeance": "2024-04-15",
+    "date_derniere_echeance": "2026-09-15",
+    "nombre_echeances_total": 36,
+    "nombre_echeances_restantes": 0,
+    "montant_echeance": 833.33,
+    "dpay": {
+      "numero_payeur": "PAY-2024-003",
+      "mode_paiement": "VIR",
+      "montant_paiement": 833.33,
+      "date_dernier_paiement": "2026-09-15",
+      "reference_compte": "FR1420041010050500015M02608"
+    },
+    "dgar": {
+      "numero_garantie": "GAR-2024-003",
+      "type_garantie": "PRIVILEGE",
+      "montant_garantie": 45000.00,
+      "pourcentage_couverture": 150.0,
+      "date_prise_effet": "2024-03-10",
+      "date_expiration": "2026-09-20",
+      "statut_garantie": "CLOTURÉ"
+    }
+  }
+]

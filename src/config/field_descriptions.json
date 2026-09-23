@@ -1,0 +1,54 @@
+{
+  "dgen": {
+    "repais": "Référence unique du prêt - identifiant du dossier dans le système",
+    "date_lancement": "Date de lancement/création du dossier",
+    "devise": "Devise du prêt (EUR, USD, etc.) - Code devise",
+    "montant_principal": "Montant normalisé et accordé du dossier (montant initial du crédit)",
+    "duree_mois": "Durée totale du prêt en mois",
+    "type_pret": "Type de prêt: CREDIT (prêt amortissable), REVOLVING (crédit revolving), etc.",
+    "taux_interet_base": "Taux d'intérêt de base du dossier (en %)",
+    "prochaine_echeance": "Date de la prochaine échéance de paiement prévue",
+    "siege_place": "Code siège de la place (agence bancaire)",
+    "categorie_financement": "Catégorie de financement: CORPORATIF, PME, REVOLVING, etc.",
+    "date_creation": "Date de création du dossier dans le système",
+    "statut_dossier": "Statut du dossier: ACTIF, FERMÉ, SUSPENDU, etc."
+  },
+  "dpay": {
+    "numero_payeur": "Numéro unique du payeur du dossier",
+    "mode_paiement": "Mode de paiement: VIR (virement), PRLV (prélèvement), CHQ (chèque), etc.",
+    "montant_paiement": "Montant de chaque échéance/paiement régulier",
+    "date_dernier_paiement": "Date du dernier paiement effectué",
+    "reference_compte": "IBAN ou numéro de compte du débiteur pour les paiements"
+  },
+  "dgar": {
+    "numero_garantie": "Numéro unique d'identification de la garantie",
+    "type_garantie": "Type de garantie: HYPO (hypothèque), NANTISSEMENT, PRIVILEGE, GAGE, etc.",
+    "montant_garantie": "Montant de la garantie (valeur garantie)",
+    "pourcentage_couverture": "Pourcentage de couverture du prêt par la garantie",
+    "date_prise_effet": "Date de prise d'effet de la garantie",
+    "date_expiration": "Date d'expiration ou de libération de la garantie",
+    "statut_garantie": "Statut: VALIDE, CLOTURÉ, EXPIRÉE, LEVÉE, etc."
+  },
+  "evenements": {
+    "type_evenement": "Type d'événement: DÉBLOCAGE, PAIEMENT, TIRAGE, CLÔTURE, MODIFICATION, etc.",
+    "date_evenement": "Date de survenance de l'événement",
+    "montant_evenement": "Montant associé à l'événement (déblocage, paiement, etc.)",
+    "description": "Description textuelle de l'événement"
+  },
+  "contexte_semantique": {
+    "DÉBLOCAGE": "Événement de déblocage initial ou partiel des fonds accordés",
+    "PAIEMENT": "Paiement d'une échéance régulière d'intérêts et/ou capital",
+    "TIRAGE": "Tirage partiel sur un crédit revolving disponible",
+    "CLÔTURE": "Fermeture du dossier après remboursement complet",
+    "MODIFICATION": "Modification des conditions du prêt (taux, durée, etc.)",
+    "CREDIT": "Prêt amortissable à durée et échéances fixes",
+    "REVOLVING": "Crédit revolving avec ligne disponible et tirages variables",
+    "ACTIF": "Dossier en cours, remboursements en cours",
+    "FERMÉ": "Dossier clôturé après paiement complet",
+    "VIR": "Paiement par virement bancaire",
+    "PRLV": "Paiement par prélèvement automatique",
+    "HYPO": "Garantie par hypothèque sur bien immobilier",
+    "NANTISSEMENT": "Garantie par nantissement de bien meuble",
+    "PRIVILEGE": "Privilège légal ou conventionnel"
+  }
+}
