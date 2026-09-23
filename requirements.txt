@@ -18,5 +18,5 @@ pytest==7.4.0
 pytest-cov==4.1.0
 
 # Development
-black==23.9.1
+black==26.3.1
 flake8==6.0.0
