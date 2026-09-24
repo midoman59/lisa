@@ -1,0 +1,180 @@
+<svg viewBox="0 0 1200 850" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .box { fill: #f5f5f5; stroke: #333; stroke-width: 2; }
+      .box-header { fill: #333; font-weight: bold; font-size: 15px; }
+      .box-text { fill: #666; font-size: 12px; }
+      .arrow { stroke: #666; stroke-width: 2.5; fill: none; marker-end: url(#arrowhead); }
+      .arrow-label { fill: #555; font-size: 12px; font-weight: 600; background: white; }
+      .section-title { fill: #222; font-size: 18px; font-weight: bold; }
+      .tier-label { fill: #999; font-size: 10px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+
+      /* Couleurs par rôle */
+      .user-box { fill: #e8f5e9; stroke: #4caf50; stroke-width: 2.5; }
+      .agent-box { fill: #e3f2fd; stroke: #2196f3; stroke-width: 2.5; }
+      .data-box { fill: #fff3e0; stroke: #ff9800; stroke-width: 2.5; }
+      .cloud-box { fill: #f3e5f5; stroke: #9c27b0; stroke-width: 2.5; }
+      .response-box { fill: #fce4ec; stroke: #e91e63; stroke-width: 2.5; }
+    </style>
+    <marker id="arrowhead" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <polygon points="0 0, 12 6, 0 12" fill="#666" />
+    </marker>
+  </defs>
+
+  <!-- Fond -->
+  <rect width="1200" height="850" fill="#fafafa"/>
+
+  <!-- ========== FLUX PRINCIPAL (HAUT) ========== -->
+
+  <!-- Titre -->
+  <text x="600" y="40" class="section-title" text-anchor="middle">Architecture de l'Agent LISA - Vue d'ensemble</text>
+
+  <!-- ÉTAPE 1: UTILISATEUR -->
+  <text x="80" y="100" class="tier-label">① Entrée</text>
+  <rect x="40" y="110" width="180" height="100" class="user-box" rx="8"/>
+  <text x="130" y="140" class="box-header" text-anchor="middle" font-size="16">👤 Utilisateur</text>
+  <text x="130" y="162" class="box-text" text-anchor="middle">Pose une question:</text>
+  <text x="130" y="180" class="box-text" text-anchor="middle">Combien de</text>
+  <text x="130" y="198" class="box-text" text-anchor="middle">dossiers actifs?</text>
+
+  <!-- Flèche 1→2 -->
+  <path d="M 220 160 L 280 160" class="arrow"/>
+  <text x="245" y="150" class="arrow-label">Question</text>
+
+  <!-- ÉTAPE 2: AGENT -->
+  <text x="280" y="100" class="tier-label">② Orchestre</text>
+  <rect x="280" y="110" width="180" height="100" class="agent-box" rx="8"/>
+  <text x="370" y="140" class="box-header" text-anchor="middle" font-size="16">🤖 DataAgent</text>
+  <text x="370" y="162" class="box-text" text-anchor="middle">Reçoit</text>
+  <text x="370" y="180" class="box-text" text-anchor="middle">Cherche données</text>
+  <text x="370" y="198" class="box-text" text-anchor="middle">Appelle Azure</text>
+
+  <!-- Flèche 2→3 -->
+  <path d="M 460 160 L 520 160" class="arrow"/>
+  <text x="485" y="150" class="arrow-label">Contexte</text>
+
+  <!-- ÉTAPE 3: DATALOADER -->
+  <text x="520" y="100" class="tier-label">③ Données</text>
+  <rect x="520" y="110" width="180" height="100" class="data-box" rx="8"/>
+  <text x="610" y="140" class="box-header" text-anchor="middle" font-size="16">📂 DataLoader</text>
+  <text x="610" y="162" class="box-text" text-anchor="middle">Lit les fichiers</text>
+  <text x="610" y="180" class="box-text" text-anchor="middle">JSON locaux:</text>
+  <text x="610" y="198" class="box-text" text-anchor="middle">src/data/</text>
+
+  <!-- Flèche 3→4 -->
+  <path d="M 700 160 L 760 160" class="arrow"/>
+  <text x="725" y="150" class="arrow-label">Données</text>
+
+  <!-- ÉTAPE 4: AZURE -->
+  <text x="760" y="100" class="tier-label">④ Intelligence</text>
+  <rect x="760" y="110" width="180" height="100" class="cloud-box" rx="8"/>
+  <text x="850" y="140" class="box-header" text-anchor="middle" font-size="16">☁️ Azure OpenAI</text>
+  <text x="850" y="162" class="box-text" text-anchor="middle">Modèle:</text>
+  <text x="850" y="180" class="box-text" text-anchor="middle">gpt-5.4-mini</text>
+  <text x="850" y="198" class="box-text" text-anchor="middle">(Réfléchit)</text>
+
+  <!-- Flèche 4→5 -->
+  <path d="M 940 160 L 1000 160" class="arrow"/>
+  <text x="965" y="150" class="arrow-label">Réponse</text>
+
+  <!-- ÉTAPE 5: RÉSULTAT -->
+  <text x="1000" y="100" class="tier-label">⑤ Sortie</text>
+  <rect x="1000" y="110" width="160" height="100" class="response-box" rx="8"/>
+  <text x="1080" y="140" class="box-header" text-anchor="middle" font-size="16">💬 Résultat</text>
+  <text x="1080" y="162" class="box-text" text-anchor="middle">Vous avez</text>
+  <text x="1080" y="180" class="box-text" text-anchor="middle">2 dossiers</text>
+  <text x="1080" y="198" class="box-text" text-anchor="middle">actifs OK</text>
+
+  <!-- ========== DÉTAILS DES COMPOSANTS (HAUT DROIT) ========== -->
+
+  <text x="40" y="270" class="section-title">Détail: Flux de Données Locales</text>
+
+  <!-- JSON Box -->
+  <rect x="40" y="290" width="200" height="90" class="data-box" rx="8"/>
+  <text x="140" y="315" class="box-header" text-anchor="middle">📊 JSON Local</text>
+  <text x="140" y="337" class="box-text" text-anchor="middle">src/data/</text>
+  <text x="140" y="355" class="box-text" text-anchor="middle">3 fichiers:</text>
+  <text x="140" y="373" class="box-text" text-anchor="middle">dossiers,</text>
+
+  <!-- Flèche JSON → DataLoader -->
+  <path d="M 240 335 L 300 335" class="arrow"/>
+
+  <!-- DataLoader Box -->
+  <rect x="300" y="290" width="200" height="90" class="data-box" rx="8"/>
+  <text x="400" y="315" class="box-header" text-anchor="middle">DataLoader</text>
+  <text x="400" y="337" class="box-text" text-anchor="middle">Charge et gere</text>
+  <text x="400" y="355" class="box-text" text-anchor="middle">get_dossiers()</text>
+  <text x="400" y="373" class="box-text" text-anchor="middle">search_dossiers()</text>
+
+  <!-- Flèche DataLoader → Agent -->
+  <path d="M 500 335 L 560 335" class="arrow"/>
+
+  <!-- Agent Box (détail) -->
+  <rect x="560" y="290" width="220" height="90" class="agent-box" rx="8"/>
+  <text x="670" y="315" class="box-header" text-anchor="middle">DataAgent</text>
+  <text x="670" y="337" class="box-text" text-anchor="middle">Prépare contexte:</text>
+  <text x="670" y="355" class="box-text" text-anchor="middle">• Stats (actifs/total)</text>
+  <text x="670" y="373" class="box-text" text-anchor="middle">• Dossiers + détails</text>
+
+  <!-- ========== LES 6 ÉTAPES DU FLUX (BAS GAUCHE) ========== -->
+
+  <text x="40" y="430" class="section-title">6 Étapes du Processus</text>
+
+  <!-- Étape 1 -->
+  <circle cx="70" cy="490" r="22" fill="#4caf50" stroke="#2e7d32" stroke-width="2"/>
+  <text x="70" y="500" class="box-text" text-anchor="middle" fill="white" font-weight="bold" font-size="16">1</text>
+  <text x="110" y="495" class="box-text" font-weight="600">Question: "Combien de dossiers actifs?"</text>
+
+  <!-- Étape 2 -->
+  <circle cx="70" cy="540" r="22" fill="#2196f3" stroke="#1565c0" stroke-width="2"/>
+  <text x="70" y="550" class="box-text" text-anchor="middle" fill="white" font-weight="bold" font-size="16">2</text>
+  <text x="110" y="545" class="box-text" font-weight="600">DataAgent reçoit et prépare</text>
+
+  <!-- Étape 3 -->
+  <circle cx="70" cy="590" r="22" fill="#ff9800" stroke="#e65100" stroke-width="2"/>
+  <text x="70" y="600" class="box-text" text-anchor="middle" fill="white" font-weight="bold" font-size="16">3</text>
+  <text x="110" y="595" class="box-text" font-weight="600">DataLoader lit dossiers.json</text>
+
+  <!-- Étape 4 -->
+  <circle cx="70" cy="640" r="22" fill="#9c27b0" stroke="#6a1b9a" stroke-width="2"/>
+  <text x="70" y="650" class="box-text" text-anchor="middle" fill="white" font-weight="bold" font-size="16">4</text>
+  <text x="110" y="645" class="box-text" font-weight="600">Agent prépare contexte riche</text>
+
+  <!-- Étape 5 -->
+  <circle cx="70" cy="690" r="22" fill="#9c27b0" stroke="#6a1b9a" stroke-width="2"/>
+  <text x="70" y="700" class="box-text" text-anchor="middle" fill="white" font-weight="bold" font-size="16">5</text>
+  <text x="110" y="695" class="box-text" font-weight="600">Appel Azure OpenAI</text>
+
+  <!-- Étape 6 -->
+  <circle cx="70" cy="740" r="22" fill="#e91e63" stroke="#ad1457" stroke-width="2"/>
+  <text x="70" y="750" class="box-text" text-anchor="middle" fill="white" font-weight="bold" font-size="16">6</text>
+  <text x="110" y="745" class="box-text" font-weight="600">Azure répond: "2 dossiers actifs" ✅</text>
+
+  <!-- ========== RÔLES DES COMPOSANTS (BAS DROIT) ========== -->
+
+  <text x="560" y="430" class="section-title">Rôles des Composants</text>
+
+  <!-- DataAgent -->
+  <rect x="560" y="450" width="320" height="75" fill="none" stroke="#2196f3" stroke-width="2" stroke-dasharray="5,5" rx="6"/>
+  <text x="575" y="475" class="box-header">🤖 DataAgent</text>
+  <text x="575" y="496" class="box-text">Chef d'orchestre - Reçoit question, cherche données,</text>
+  <text x="575" y="513" class="box-text">prépare contexte, appelle Azure, retourne réponse</text>
+
+  <!-- DataLoader -->
+  <rect x="560" y="540" width="320" height="75" fill="none" stroke="#ff9800" stroke-width="2" stroke-dasharray="5,5" rx="6"/>
+  <text x="575" y="565" class="box-header">📂 DataLoader</text>
+  <text x="575" y="586" class="box-text">Accès aux données - Charge JSON locaux,</text>
+  <text x="575" y="603" class="box-text">fournit méthodes de recherche (dossiers, événements)</text>
+
+  <!-- Azure OpenAI -->
+  <rect x="560" y="630" width="320" height="75" fill="none" stroke="#9c27b0" stroke-width="2" stroke-dasharray="5,5" rx="6"/>
+  <text x="575" y="655" class="box-header">☁️ Azure OpenAI</text>
+  <text x="575" y="676" class="box-text">Intelligence - Comprend contexte métier,</text>
+  <text x="575" y="693" class="box-text">génère réponses intelligentes en français</text>
+
+  <!-- JSON Local -->
+  <rect x="560" y="720" width="320" height="75" fill="none" stroke="#ff9800" stroke-width="2" stroke-dasharray="5,5" rx="6"/>
+  <text x="575" y="745" class="box-header">📊 JSON Local</text>
+  <text x="575" y="766" class="box-text">Stockage MVP - Fichiers JSON qui simulent la BD,</text>
+  <text x="575" y="783" class="box-text">permet développement sans connexion DB réelle</text>
+</svg>
