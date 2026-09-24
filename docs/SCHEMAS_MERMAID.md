@@ -2,6 +2,8 @@
 
 Basé sur **LS - V3.8.0 - C.01.02 - Description des prises - Fichiers permanents** (346 pages)
 
+**STRUCTURE DÉTAILLÉE AVEC VRAIS CODES DE CHAMPS ET VALEURS**
+
 ## Sommaire des Tables Principales
 
 | Numéro | Table | Code | Description | Pages |
@@ -18,16 +20,83 @@ Basé sur **LS - V3.8.0 - C.01.02 - Description des prises - Fichiers permanents
 
 **Pages: 4-49 | Code: ENR-DGEN**
 
-Structure principale pour chaque dossier de crédit.
+### Structure: Enregistrements et Zones
+
+DGEN contient 7 enregistrements différents (01-02-38-39-43-44-62) avec zones de données.
+
+### ENREGISTREMENT (01): DONNÉES DE LANCEMENT
+
+**Code Champs Clés:**
+
+| Code | Type | Taille | Description | Valeurs/Exemples |
+|------|------|--------|-------------|-------------------|
+| CLEOFS | X(27) | 27 | Clé partielle = identifie le dossier | DEI|FRANCE|DOSSIER-001 |
+| IDDOSRG | X(5) | 5 | Identifiant de l'enregistrement | O1 (Enregistrement 01) |
+| NOENREG | 99(9) | 9 | Numéro d'occurrence du bloc |  |
+| NOENREG | 99 | Numéro de jour dans le mois | JJ de la zone DTECH-12 |
+| ABRNNAT | 99 | Numéro d'occurrence des zones résultats accessoire à percevoir | groupées par nature |
+
+---
+
+### ENREGISTREMENT (50): RÉSULTATS - CODES STATUS DOSSIER
+
+**Pages: 46 | CRITIQUES POUR LE RAG**
+
+#### CDSITC-22: Code situation comptable du dossier
+```
+blanc = prêt en situation normale
+3 = prêt douteux (si déclaissement manuel)
+4 = prêt compromis (si déclaissement manuel)
+5 = prêt compromis (si déclaissement automatique)
+```
+**Classe prêt (Table P039 poste 4-6):** codes prédéfinis pour différents niveaux de risque
+
+#### CDSITDOS-22: Code situation du dossier *** CRITICAL ***
+```
+1 = dossier accordé en attente de réalisation
+2 = dossier en cours d'amortissement
+3 = dossier en attente de prise en charge données financières (RAP, blocage)
+4 = dossier en attente de reprise
+5 = dossier soldé ← C'EST LA VALEUR POUR "DOSSIER SOLDÉ" (NOT 6)
+```
+**Valeurs possibles:** 1, 2, 3, 4, 5 uniquement (5 valeurs totales)
+
+#### CDMOTIF-22: Code motif solde du dossier
+```
+0 = dossier solde à blanc
+1 = après RAT (crédit amortissable classique)
+2 = après passage en contentieux
+3 = après passage en continu
+et autres codes spécifiques au type de clôture
+```
+
+#### INDAMOR-22: Indicateur d'amortissement
+```
+0 = au départ, on pour un dossier de type 0
+1 = à partir de l'échéance où commence la phase de prorogatione, avant le dernier débloc
+3 = à partir de l'anticipation de l'échéance ou commence la phase de prorogatione jusqu'à
+4 = à partir de la commande de dernier débloc, sans réduction de nominal
+5 = à partir de fin d'utilisation attente
+6 = après reprise après modif données financières
+7 = reprise après modif données financières
+8 = blocage
+9 = modification date prochaine échéance d'engagement
+A = déblocage progressif
+B = modification date début du contrat à date future
+D = passage à taux indexé, changement d'index
+E = report d'échéance
+F = passage à taux fixe
+```
+
+---
+
+## 2. Table LIGNE (DPAY) - Fichier des dossiers de ligne
+
+**Pages: 53-111 | Code: ENR-DLIGN**
+
+Chaque ligne de crédit associée à un dossier principal. Plusieurs lignes par CLEOFS.
 
 ### Champs Clés
-
-| Position | Code Champ | Type | Taille | Description | Enregistrement |
-|----------|-----------|------|--------|-------------|-----------------|
-| 1 | CLEOFS | X(00027) | 27 | Clé partielle | ENR-DGEN |
-| 2 | IDDOSRG | X(00005) | 5 | Identifiant de l'enregistrement | |
-| 3 | NOENREG | 99(00009) | 9 | Numéro d'occurrence du bloc | |
-| 4 | OPFLDRO1 | X(00037) | 37 | Zone de groupe | |
 
 ### Diagramme DOSSIER
 

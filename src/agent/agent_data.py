@@ -98,7 +98,7 @@ Réponse en français, sois précis et concis."""
                     {"role": "system", "content": f"CONTEXTE:\n{context}"},
                     {"role": "user", "content": user_query}
                 ],
-                temperature=0.7,
+                temperature=0.1,  # TRÈS BAS: réponses précises basées sur le contexte (pas de créativité/hallucinations)
                 max_completion_tokens=500
             )
 

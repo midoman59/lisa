@@ -21,9 +21,10 @@ import pdfplumber
 
 load_dotenv()
 
-# Configuration
-CHUNK_SIZE = 1_000
-CHUNK_OVERLAP = 150
+# Configuration - OPTIMISÉ POUR GARDER CONTEXTE COMPLET
+# Chunks plus gros = meilleur contexte = moins de confusion entre champs
+CHUNK_SIZE = 2_500  # Augmenté de 1000 pour garder les définitions complètes
+CHUNK_OVERLAP = 400  # Augmenté proportionnellement pour meilleure continuité
 EMBEDDING_DIMENSIONS = 3_072
 
 # Environment variables
