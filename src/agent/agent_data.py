@@ -44,10 +44,16 @@ class DataAgent:
         rag_results = self.loader.search_documents(query, top=5)
 
         if rag_results:
-            context += "\n📚 DOCUMENTS TROUVÉS (via RAG):\n"
+            context += "\n📚 DOCUMENTS TROUVÉS (via RAG - Hybrid Search):\n"
             for i, doc in enumerate(rag_results, 1):
-                context += f"\n{i}. [{doc['type'].upper()}] {doc['source']}\n"
-                context += f"   Score: {doc['score']:.2f}\n"
+                source_info = f"{doc['source']}"
+                if doc.get('page'):
+                    source_info += f" (Page {doc['page']})"
+                elif doc.get('sheet'):
+                    source_info += f" ({doc['sheet']} Row {doc['row_number']})"
+
+                context += f"\n{i}. {source_info}\n"
+                context += f"   Type: {doc.get('source_type', 'unknown')} | Score: {doc['score']:.3f}\n"
                 # Limiter le contenu pour ne pas surcharger le prompt
                 content = doc['content'][:400]
                 context += f"   {content}{'...' if len(doc['content']) > 400 else ''}\n"
