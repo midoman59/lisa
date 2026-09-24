@@ -17,14 +17,14 @@ from typing import Iterable, Iterator
 
 from dotenv import load_dotenv
 from openai import OpenAI
-from pypdf import PdfReader
+import pdfplumber
 
 load_dotenv()
 
 # Configuration
 CHUNK_SIZE = 1_000
 CHUNK_OVERLAP = 150
-EMBEDDING_DIMENSIONS = 1_536
+EMBEDDING_DIMENSIONS = 3_072
 
 # Environment variables
 AZURE_OPENAI_ENDPOINT = os.getenv("AZURE_OPENAI_ENDPOINT", "").rstrip("/")
@@ -60,11 +60,11 @@ def chunks(text: str, size: int = CHUNK_SIZE, overlap: int = CHUNK_OVERLAP) -> I
 
 def extract_pdf(path: Path) -> Iterable[tuple[str, dict[str, object]]]:
     """Extract text from PDF pages."""
-    reader = PdfReader(path)
-    for page_number, page in enumerate(reader.pages, start=1):
-        text = page.extract_text() or ""
-        if text.strip():
-            yield text, {"page": page_number}
+    with pdfplumber.open(path) as pdf:
+        for page_number, page in enumerate(pdf.pages, start=1):
+            text = page.extract_text() or ""
+            if text.strip():
+                yield text, {"page": page_number}
 
 
 def extract_json(path: Path) -> Iterable[tuple[str, dict[str, object]]]:

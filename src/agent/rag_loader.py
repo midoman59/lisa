@@ -8,9 +8,14 @@ import json
 import os
 import urllib.error
 import urllib.request
+from pathlib import Path
 from typing import Any
 
+from dotenv import load_dotenv
 from openai import OpenAI
+
+# Load .env from project root
+load_dotenv(Path(__file__).parent.parent.parent / ".env")
 
 
 class RAGLoader:
@@ -66,19 +71,19 @@ class RAGLoader:
             # Créer embedding pour la requête
             query_vector = self.embed_text(query)
 
-            # Préparer la requête hybrid
+            # Préparer la requête hybrid avec format correct (vectorQueries, pas vectors)
             search_payload = {
                 "search": query,
-                "vectors": [
+                "top": top,
+                "select": "id,content,source,source_type,page,sheet,row_number,chunk_number",
+                "vectorQueries": [
                     {
-                        "value": query_vector,
+                        "kind": "vector",
+                        "vector": query_vector,
                         "fields": "content_vector",
                         "k": top,
                     }
                 ],
-                "select": ["id", "content", "source", "source_type", "page", "sheet", "row_number", "chunk_number"],
-                "top": top,
-                "queryType": "semantic",
             }
 
             # Effectuer la recherche
