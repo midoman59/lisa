@@ -1,199 +1,227 @@
 #!/usr/bin/env python3
 """
-Index PDF documentation + JSON data into Azure Search for RAG
-Lance: python scripts/index_pdf_and_data.py
+Ingest PDF documentation + JSON data into Azure Search with embeddings and intelligent chunking.
+Based on expert colleague's rag_search implementation with API Key authentication.
+
+Launch: python scripts/index_pdf_and_data.py
 """
 
-import os
+import hashlib
 import json
+import os
+import re
+import urllib.error
+import urllib.request
 from pathlib import Path
-from dotenv import load_dotenv
-from azure.core.credentials import AzureKeyCredential
-from azure.search.documents import SearchClient
-from azure.search.documents.indexes import SearchIndexClient
-from azure.identity import DefaultAzureCredential
+from typing import Iterable, Iterator
 
-# Essayer d'importer pdfplumber, sinon PyPDF2
-try:
-    import pdfplumber
-    PDF_READER = "pdfplumber"
-except ImportError:
-    try:
-        from PyPDF2 import PdfReader
-        PDF_READER = "PyPDF2"
-    except ImportError:
-        print("❌ Erreur: pdfplumber ou PyPDF2 requis")
-        print("   Installe: pip install pdfplumber")
-        exit(1)
+from dotenv import load_dotenv
+from openai import OpenAI
+from pypdf import PdfReader
 
 load_dotenv()
 
 # Configuration
-ENDPOINT = os.getenv("AZURE_SEARCH_ENDPOINT")
-ADMIN_KEY = os.getenv("AZURE_SEARCH_ADMIN_KEY")
-INDEX_NAME = os.getenv("AZURE_SEARCH_INDEX_NAME", "lisa-documents")
+CHUNK_SIZE = 1_000
+CHUNK_OVERLAP = 150
+EMBEDDING_DIMENSIONS = 1_536
 
-if not ENDPOINT or not ADMIN_KEY:
-    print("❌ Erreur: AZURE_SEARCH_ENDPOINT et AZURE_SEARCH_ADMIN_KEY requis dans .env")
+# Environment variables
+AZURE_OPENAI_ENDPOINT = os.getenv("AZURE_OPENAI_ENDPOINT", "").rstrip("/")
+AZURE_OPENAI_API_KEY = os.getenv("AZURE_OPENAI_API_KEY")
+AZURE_OPENAI_EMBEDDING_DEPLOYMENT = os.getenv("AZURE_OPENAI_EMBEDDING_DEPLOYMENT", "text-embedding-3-small")
+AZURE_SEARCH_ENDPOINT = os.getenv("AZURE_SEARCH_ENDPOINT", "").rstrip("/")
+AZURE_SEARCH_API_KEY = os.getenv("AZURE_SEARCH_API_KEY")
+AZURE_SEARCH_INDEX = os.getenv("AZURE_SEARCH_INDEX_NAME", "lisa-documents")
+
+if not all([AZURE_OPENAI_ENDPOINT, AZURE_OPENAI_API_KEY, AZURE_SEARCH_ENDPOINT, AZURE_SEARCH_API_KEY]):
+    print("❌ Erreur: Manque de variables d'environnement")
+    print("   Vérifie .env: AZURE_OPENAI_*, AZURE_SEARCH_*")
     exit(1)
 
-print("=" * 70)
-print("📚 INDEXATION: PDF + DATA JSON → AZURE SEARCH")
-print("=" * 70)
 
-# Créer le client Search avec Admin Key
-try:
-    search_client = SearchClient(
-        endpoint=ENDPOINT,
-        index_name=INDEX_NAME,
-        credential=AzureKeyCredential(ADMIN_KEY)
+def chunks(text: str, size: int = CHUNK_SIZE, overlap: int = CHUNK_OVERLAP) -> Iterator[str]:
+    """Split text into overlapping chunks, preferring word boundaries."""
+    text = re.sub(r"\s+", " ", text).strip()
+    start = 0
+    while start < len(text):
+        end = min(start + size, len(text))
+        if end < len(text):
+            boundary = text.rfind(" ", start, end)
+            if boundary > start:
+                end = boundary
+        chunk = text[start:end].strip()
+        if chunk:
+            yield chunk
+        if end == len(text):
+            break
+        start = max(end - overlap, start + 1)
+
+
+def extract_pdf(path: Path) -> Iterable[tuple[str, dict[str, object]]]:
+    """Extract text from PDF pages."""
+    reader = PdfReader(path)
+    for page_number, page in enumerate(reader.pages, start=1):
+        text = page.extract_text() or ""
+        if text.strip():
+            yield text, {"page": page_number}
+
+
+def extract_json(path: Path) -> Iterable[tuple[str, dict[str, object]]]:
+    """Extract structured data from JSON files."""
+    with open(path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    items = data if isinstance(data, list) else [data]
+    for row_number, item in enumerate(items, start=1):
+        text = json.dumps(item, ensure_ascii=False, indent=2)
+        yield text, {"sheet": path.stem, "row_number": row_number}
+
+
+def get_openai_client() -> tuple[OpenAI, str]:
+    """Get OpenAI client configured for Azure."""
+    endpoint = AZURE_OPENAI_ENDPOINT
+    if "/api/projects/" in endpoint:
+        endpoint = endpoint.split("/api/projects/", 1)[0]
+    if not endpoint.endswith("/openai/v1"):
+        endpoint = f"{endpoint}/openai/v1"
+
+    return OpenAI(base_url=endpoint, api_key=AZURE_OPENAI_API_KEY), AZURE_OPENAI_EMBEDDING_DEPLOYMENT
+
+
+def embed(client: OpenAI, deployment: str, text: str) -> list[float]:
+    """Create embedding for text."""
+    return client.embeddings.create(model=deployment, input=text).data[0].embedding
+
+
+def request_search(method: str, url: str, api_key: str, payload: object | None = None) -> dict:
+    """Make authenticated request to Azure Search."""
+    body = json.dumps(payload).encode("utf-8") if payload is not None else None
+    request = urllib.request.Request(
+        url,
+        data=body,
+        method=method,
+        headers={"Content-Type": "application/json", "api-key": api_key},
     )
-    print("\n✅ Connexion à Azure Search établie")
-    print(f"   Endpoint: {ENDPOINT}")
-    print(f"   Index: {INDEX_NAME}")
-except Exception as e:
-    print(f"\n❌ Erreur connexion: {e}")
-    exit(1)
-
-# ========== INDEXER LE PDF ==========
-
-PDF_PATH = Path("docs/LS_V3.8.0_Fichiers_Permanents.pdf")
-
-if PDF_PATH.exists():
-    print(f"\n📝 Étape 1: Extraire et indexer le PDF...")
-    print(f"   Fichier: {PDF_PATH}")
-
     try:
-        # Extraire le texte du PDF
-        pdf_text = ""
-        page_count = 0
+        with urllib.request.urlopen(request) as response:
+            return json.loads(response.read().decode("utf-8")) if response.length != 0 else {}
+    except urllib.error.HTTPError as error:
+        message = error.read().decode("utf-8")
+        raise RuntimeError(f"Azure Search {method} {url} failed: {message}") from error
 
-        if PDF_READER == "pdfplumber":
-            with pdfplumber.open(PDF_PATH) as pdf:
-                page_count = len(pdf.pages)
-                for i, page in enumerate(pdf.pages):
-                    page_text = page.extract_text()
-                    if page_text:
-                        pdf_text += f"\n--- Page {i+1} ---\n{page_text}"
-        else:
-            with open(PDF_PATH, "rb") as f:
-                reader = PdfReader(f)
-                page_count = len(reader.pages)
-                for i, page in enumerate(reader.pages):
-                    page_text = page.extract_text()
-                    if page_text:
-                        pdf_text += f"\n--- Page {i+1} ---\n{page_text}"
 
-        print(f"   ✅ Extrait: {page_count} pages")
+def ensure_index(endpoint: str, api_key: str, index_name: str) -> None:
+    """Create or update Azure Search index with vector search configuration."""
+    url = f"{endpoint}/indexes/{index_name}?api-version=2024-07-01"
+    index = {
+        "name": index_name,
+        "fields": [
+            {"name": "id", "type": "Edm.String", "key": True, "filterable": True},
+            {"name": "content", "type": "Edm.String", "searchable": True},
+            {"name": "content_vector", "type": "Collection(Edm.Single)", "searchable": True, "vectorSearchProfile": "vector-profile", "dimensions": EMBEDDING_DIMENSIONS},
+            {"name": "source", "type": "Edm.String", "filterable": True, "facetable": True},
+            {"name": "source_type", "type": "Edm.String", "filterable": True, "facetable": True},
+            {"name": "page", "type": "Edm.Int32", "filterable": True, "sortable": True},
+            {"name": "sheet", "type": "Edm.String", "filterable": True},
+            {"name": "row_number", "type": "Edm.Int32", "filterable": True},
+            {"name": "chunk_number", "type": "Edm.Int32", "filterable": True, "sortable": True},
+        ],
+        "vectorSearch": {
+            "algorithms": [{"name": "hnsw", "kind": "hnsw", "hnswParameters": {"metric": "cosine"}}],
+            "profiles": [{"name": "vector-profile", "algorithm": "hnsw"}],
+        },
+    }
+    request_search("PUT", url, api_key, index)
+    print(f"✅ Index '{index_name}' ready")
 
-        # Diviser le contenu en chunks (1000 caractères par chunk)
-        chunk_size = 1000
-        chunks = []
 
-        for i in range(0, len(pdf_text), chunk_size):
-            chunk = pdf_text[i:i + chunk_size]
-            chunks.append({
-                "id": f"pdf-chunk-{len(chunks)}",
-                "content": chunk,
-                "type": "documentation",
-                "document_id": "LS_V3.8.0",
-                "source": "LS_V3.8.0_Fichiers_Permanents.pdf",
-                "metadata": f"PDF Documentation - Page coverage"
-            })
+def ingest_documents(folder: Path) -> int:
+    """Ingest PDF and JSON documents into Azure Search."""
+    print("=" * 70)
+    print("📚 INDEXATION INTELLIGENTE: PDF + JSON → AZURE SEARCH")
+    print("=" * 70)
 
-        # Indexer les chunks
-        if chunks:
-            print(f"   📤 Indexation de {len(chunks)} chunks du PDF...")
-            search_client.upload_documents(chunks)
-            print(f"   ✅ PDF indexé: {len(chunks)} chunks")
-        else:
-            print("   ⚠️  Aucun contenu extrait du PDF")
+    client, embedding_deployment = get_openai_client()
+    print(f"\n🔐 Configuration:")
+    print(f"   Endpoint Search: {AZURE_SEARCH_ENDPOINT}")
+    print(f"   Index: {AZURE_SEARCH_INDEX}")
+    print(f"   Embedding: {embedding_deployment}")
 
-    except Exception as e:
-        print(f"   ❌ Erreur traitement PDF: {e}")
-        print("   💡 Installe: pip install pdfplumber")
-else:
-    print(f"\n⚠️  PDF non trouvé: {PDF_PATH}")
+    ensure_index(AZURE_SEARCH_ENDPOINT, AZURE_SEARCH_API_KEY, AZURE_SEARCH_INDEX)
 
-# ========== INDEXER LES DONNÉES JSON ==========
+    documents = []
 
-print(f"\n📝 Étape 2: Indexer les données JSON...")
+    # Process PDF
+    pdf_path = Path("docs/LS_V3.8.0_Fichiers_Permanents.pdf")
+    if pdf_path.exists():
+        print(f"\n📄 Traitement PDF: {pdf_path.name}")
+        for text, metadata in extract_pdf(pdf_path):
+            for chunk_number, content in enumerate(chunks(text), start=1):
+                identity = f"{pdf_path.resolve()}:{metadata}:{chunk_number}"
+                print(f"   ⏳ Embedding chunk {chunk_number}...", end="\r")
+                documents.append({
+                    "@search.action": "mergeOrUpload",
+                    "id": hashlib.sha256(identity.encode("utf-8")).hexdigest(),
+                    "content": content,
+                    "content_vector": embed(client, embedding_deployment, content),
+                    "source": pdf_path.name,
+                    "source_type": "pdf",
+                    "page": metadata.get("page"),
+                    "sheet": None,
+                    "row_number": None,
+                    "chunk_number": chunk_number,
+                })
+        print(f"   ✅ PDF: {len([d for d in documents if d['source_type'] == 'pdf'])} chunks\n")
 
-json_files = [
-    ("src/data/dossiers.json", "dossier"),
-    ("src/data/enregistrements.json", "enregistrement"),
-    ("src/data/événements.json", "événement"),
-]
+    # Process JSON files
+    json_files = [
+        ("src/data/dossiers.json", "dossier"),
+        ("src/data/enregistrements.json", "enregistrement"),
+    ]
 
-documents_to_index = []
+    for json_path, doc_type in json_files:
+        path = Path(json_path)
+        if not path.exists():
+            print(f"   ⚠️  Fichier non trouvé: {json_path}")
+            continue
 
-for json_path, doc_type in json_files:
-    json_file = Path(json_path)
+        print(f"   📋 Traitement JSON: {path.name}")
+        for text, metadata in extract_json(path):
+            for chunk_number, content in enumerate(chunks(text), start=1):
+                identity = f"{path.resolve()}:{metadata}:{chunk_number}"
+                documents.append({
+                    "@search.action": "mergeOrUpload",
+                    "id": hashlib.sha256(identity.encode("utf-8")).hexdigest(),
+                    "content": content,
+                    "content_vector": embed(client, embedding_deployment, content),
+                    "source": path.name,
+                    "source_type": "json",
+                    "page": None,
+                    "sheet": metadata.get("sheet"),
+                    "row_number": metadata.get("row_number"),
+                    "chunk_number": chunk_number,
+                })
+        print(f"   ✅ {path.name}: chunks indexés")
 
-    if not json_file.exists():
-        print(f"   ⚠️  Fichier non trouvé: {json_path}")
-        continue
+    # Upload in batches
+    if documents:
+        print(f"\n📤 Upload de {len(documents)} documents...")
+        url = f"{AZURE_SEARCH_ENDPOINT}/indexes/{AZURE_SEARCH_INDEX}/docs/index?api-version=2024-07-01"
 
-    print(f"   📂 Lecture: {json_path}")
+        for start in range(0, len(documents), 100):
+            batch = documents[start:start + 100]
+            result = request_search("POST", url, AZURE_SEARCH_API_KEY, {"value": batch})
+            failures = [item for item in result.get("value", []) if not item.get("status")]
+            if failures:
+                raise RuntimeError(f"Failed to index documents: {failures}")
+            print(f"   ✅ {min(start + len(batch), len(documents))}/{len(documents)} documents indexés")
 
-    try:
-        with open(json_file, "r", encoding="utf-8") as f:
-            data = json.load(f)
+    print("\n" + "=" * 70)
+    print(f"✅ INDEXATION TERMINÉE: {len(documents)} documents")
+    print("=" * 70)
+    return len(documents)
 
-        # Gérer si c'est une liste ou un dict
-        items = data if isinstance(data, list) else [data]
 
-        for i, item in enumerate(items):
-            # Créer une représentation textuelle du document
-            content = json.dumps(item, ensure_ascii=False, indent=2)
-            doc_id = item.get("id") or item.get("numero_dossier") or f"{doc_type}-{i}"
-
-            doc = {
-                "id": f"{doc_type}-{doc_id}",
-                "content": content,
-                "type": doc_type,
-                "document_id": str(doc_id),
-                "source": json_file.name,
-                "metadata": json.dumps({
-                    "file": json_file.name,
-                    "type": doc_type,
-                    **{k: v for k, v in item.items() if isinstance(v, (str, int, float, bool))}
-                }, ensure_ascii=False)
-            }
-            documents_to_index.append(doc)
-
-        print(f"      ✅ {len(items)} documents lus")
-
-    except Exception as e:
-        print(f"      ❌ Erreur: {e}")
-
-# Indexer tous les documents
-if documents_to_index:
-    print(f"\n   📤 Indexation de {len(documents_to_index)} documents JSON...")
-    try:
-        search_client.upload_documents(documents_to_index)
-        print(f"   ✅ Données JSON indexées: {len(documents_to_index)} documents")
-    except Exception as e:
-        print(f"   ❌ Erreur indexation: {e}")
-
-# ========== RÉSUMÉ ==========
-
-print("\n" + "=" * 70)
-print("✅ INDEXATION TERMINÉE!")
-print("=" * 70)
-
-total_docs = len(chunks) + len(documents_to_index) if PDF_PATH.exists() else len(documents_to_index)
-
-print(f"""
-📊 Résumé:
-   - PDF: {len(chunks) if PDF_PATH.exists() else 0} chunks indexés
-   - JSON: {len(documents_to_index)} documents indexés
-   - Total: {total_docs} documents dans Azure Search
-
-✅ Le RAG peut maintenant:
-   - Répondre sur la structure LS V3.8.0 (depuis PDF)
-   - Répondre sur les données actuelles (depuis JSON)
-   - Combiner contexte PDF + données pour réponses intelligentes
-
-🚀 Test: python main.py
-""")
+if __name__ == "__main__":
+    ingest_documents(Path("."))
