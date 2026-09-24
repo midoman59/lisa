@@ -1,0 +1,2602 @@
+{
+  "metadata": {
+    "document": "LS - V3.8.0 - C.01.02 - Description des prises - Fichiers permanents",
+    "version": "V1.00 du 22/01/2021",
+    "source": "Sopra Banking Software",
+    "extracted": "Automatic full PDF parsing",
+    "total_pages": 346,
+    "extraction_date": "2026-09-24",
+    "statistics": {
+      "total_tables": 20,
+      "total_enregistrements": 597,
+      "total_fields": 27,
+      "total_value_definitions": 0
+    }
+  },
+  "tables": {
+    "DOSSIER": {
+      "enregistrements": {
+        "ENR-E001": {
+          "fields": []
+        },
+        "ENR-D": {
+          "fields": [
+            {
+              "code": "INTXCAL-18",
+              "type": "X",
+              "size": "1",
+              "description": "inutilisé",
+              "table": "DOSSIER",
+              "enregistrement": "ENR-D",
+              "section": null
+            },
+            {
+              "code": "CDSITPAR-16",
+              "type": "X",
+              "size": "1",
+              "description": "code situation du participant :",
+              "table": "DOSSIER",
+              "enregistrement": "ENR-D",
+              "section": null
+            },
+            {
+              "code": "CDMODGES-16",
+              "type": "X",
+              "size": "1",
+              "description": "mode de gestion du participant :",
+              "table": "DOSSIER",
+              "enregistrement": "ENR-D",
+              "section": null
+            },
+            {
+              "code": "INANTDBL-08",
+              "type": "X",
+              "size": "1",
+              "description": "code anticipation de déblocage :",
+              "table": "DOSSIER",
+              "enregistrement": "ENR-D",
+              "section": null
+            },
+            {
+              "code": "CDSITC-22",
+              "type": "X",
+              "size": "1",
+              "description": "code situation comptable du dossier :",
+              "table": "DOSSIER",
+              "enregistrement": "ENR-D",
+              "section": null
+            },
+            {
+              "code": "CDSITDOS-22",
+              "type": "X",
+              "size": "1",
+              "description": "code situation du dossier :",
+              "table": "DOSSIER",
+              "enregistrement": "ENR-D",
+              "section": null
+            },
+            {
+              "code": "CDMOFD-22",
+              "type": "X",
+              "size": "1",
+              "description": "code motif solde du dossier :",
+              "table": "DOSSIER",
+              "enregistrement": "ENR-D",
+              "section": null
+            },
+            {
+              "code": "INDAMOR-22",
+              "type": "X",
+              "size": "1",
+              "description": "indicateur d'amortissement :",
+              "table": "DOSSIER",
+              "enregistrement": "ENR-D",
+              "section": null
+            },
+            {
+              "code": "TYPECH-22",
+              "type": "X",
+              "size": "1",
+              "description": "(4 fois)",
+              "table": "DOSSIER",
+              "enregistrement": "ENR-D",
+              "section": null
+            },
+            {
+              "code": "TYPECHC-22",
+              "type": "X",
+              "size": "1",
+              "description": "(4 fois)",
+              "table": "DOSSIER",
+              "enregistrement": "ENR-D",
+              "section": null
+            },
+            {
+              "code": "TYDINC-22",
+              "type": "X",
+              "size": "1",
+              "description": "type du dernier événement traité :",
+              "table": "DOSSIER",
+              "enregistrement": "ENR-D",
+              "section": null
+            },
+            {
+              "code": "CDPNR-22",
+              "type": "X",
+              "size": "1",
+              "description": "code prêt nouveau",
+              "table": "DOSSIER",
+              "enregistrement": "ENR-D",
+              "section": null
+            },
+            {
+              "code": "INANTPAY-48",
+              "type": "X",
+              "size": "1",
+              "description": "indicateurs d'anticipation (4 postes)",
+              "table": "DOSSIER",
+              "enregistrement": "ENR-D",
+              "section": null
+            },
+            {
+              "code": "INAETA1-49",
+              "type": "X",
+              "size": "1",
+              "description": "indicateur d'édition à effectuer lors de la prochaine échéance d'intérêt suite à",
+              "table": "DOSSIER",
+              "enregistrement": "ENR-D",
+              "section": null
+            },
+            {
+              "code": "INAETA2-49",
+              "type": "X",
+              "size": "1",
+              "description": "indicateur d'édition à effectuer lors de la prochaine échéance d'intérêt + 1 suite à",
+              "table": "DOSSIER",
+              "enregistrement": "ENR-D",
+              "section": null
+            },
+            {
+              "code": "TYCHTX-49",
+              "type": "X",
+              "size": "1",
+              "description": "type de l'échéance sur laquelle porte le chgt de taux :",
+              "table": "DOSSIER",
+              "enregistrement": "ENR-D",
+              "section": null
+            }
+          ]
+        },
+        "ENR-DEBSOC": {
+          "fields": []
+        },
+        "ENR-DLANC": {
+          "fields": []
+        },
+        "ENR-DCOMM": {
+          "fields": []
+        },
+        "ENR-DGEN": {
+          "fields": []
+        },
+        "ENR-DINTERF": {
+          "fields": []
+        },
+        "ENR-DSTAT": {
+          "fields": []
+        },
+        "ENR-DPAY": {
+          "fields": []
+        },
+        "ENR-DPT": {
+          "fields": []
+        },
+        "ENR-DDEPREC": {
+          "fields": []
+        },
+        "ENR-DGAR": {
+          "fields": []
+        },
+        "ENR-DPAL": {
+          "fields": []
+        },
+        "ENR-DACCP": {
+          "fields": []
+        },
+        "ENR-DASSP": {
+          "fields": []
+        },
+        "ENR-DCDF": {
+          "fields": []
+        },
+        "ENR-G08": {
+          "fields": []
+        },
+        "ENR-DINDEX": {
+          "fields": []
+        },
+        "ENR-DLOA": {
+          "fields": []
+        },
+        "ENR-DREMB": {
+          "fields": []
+        },
+        "ENR-DTIERS": {
+          "fields": []
+        },
+        "ENR-DINTERV": {
+          "fields": []
+        },
+        "ENR-DSPEC": {
+          "fields": []
+        },
+        "ENR-DCASHBCK": {
+          "fields": []
+        },
+        "ENR-DCCRAP": {
+          "fields": []
+        },
+        "ENR-DCCRAT": {
+          "fields": []
+        },
+        "ENR-DCCDBL": {
+          "fields": []
+        },
+        "ENR-DCCMOD": {
+          "fields": []
+        },
+        "ENR-DCCTXFX": {
+          "fields": []
+        },
+        "ENR-DCCREPECH": {
+          "fields": []
+        },
+        "ENR-DGRET": {
+          "fields": []
+        },
+        "ENR-32": {
+          "fields": []
+        },
+        "ENR-DCDTTX": {
+          "fields": []
+        },
+        "ENR-DCDTTXTR": {
+          "fields": []
+        },
+        "ENR-DRACHAT": {
+          "fields": []
+        },
+        "ENR-DCDTINDEX": {
+          "fields": []
+        },
+        "ENR-DFORMTX": {
+          "fields": []
+        },
+        "ENR-DAMORTC": {
+          "fields": []
+        },
+        "ENR-DIMMOB": {
+          "fields": []
+        },
+        "ENR-DRESDEBL": {
+          "fields": []
+        },
+        "ENR-DASSC": {
+          "fields": []
+        },
+        "ENR-DCDTAPPEX": {
+          "fields": []
+        },
+        "ENR-DCCCHIND": {
+          "fields": []
+        },
+        "ENR-DCCTXFXPL": {
+          "fields": []
+        },
+        "ENR-TFONC": {
+          "fields": []
+        },
+        "ENR-TICAP": {
+          "fields": []
+        },
+        "ENR-TASS1": {
+          "fields": []
+        },
+        "ENR-TASS2": {
+          "fields": []
+        },
+        "ENR-TASS3": {
+          "fields": []
+        },
+        "ENR-TACC1": {
+          "fields": []
+        },
+        "ENR-TACC2": {
+          "fields": []
+        },
+        "ENR-TACC3": {
+          "fields": []
+        },
+        "ENR-TPTRES1": {
+          "fields": []
+        },
+        "ENR-TPTRES2": {
+          "fields": []
+        },
+        "ENR-TRIFL": {
+          "fields": []
+        },
+        "ENR-DTRACC": {
+          "fields": []
+        },
+        "ENR-DOAV": {
+          "fields": []
+        },
+        "ENR-TDAGD": {
+          "fields": []
+        },
+        "ENR-D68": {
+          "fields": []
+        },
+        "ENR-TRMDE": {
+          "fields": []
+        },
+        "ENR-TITRI": {
+          "fields": []
+        },
+        "ENR-DCHTX": {
+          "fields": []
+        },
+        "ENR-DREGL": {
+          "fields": []
+        },
+        "ENR-DOSS": {
+          "fields": []
+        }
+      },
+      "fields": [],
+      "description": "Fichier des dossiers de prêt"
+    },
+    "LIGNE": {
+      "enregistrements": {
+        "ENR-E001": {
+          "fields": []
+        },
+        "ENR-D": {
+          "fields": [
+            {
+              "code": "CDSITDEC-38",
+              "type": "X",
+              "size": "1",
+              "description": "code situation des découverts:",
+              "table": "LIGNE",
+              "enregistrement": "ENR-D",
+              "section": null
+            },
+            {
+              "code": "CDSITDOS-50",
+              "type": "X",
+              "size": "1",
+              "description": "code situation de la ligne:",
+              "table": "LIGNE",
+              "enregistrement": "ENR-D",
+              "section": null
+            },
+            {
+              "code": "CDSITDOS-51",
+              "type": "X",
+              "size": "1",
+              "description": "code situation de la sous-ligne:",
+              "table": "LIGNE",
+              "enregistrement": "ENR-D",
+              "section": null
+            },
+            {
+              "code": "CDSITDOS-22",
+              "type": "X",
+              "size": "1",
+              "description": "code situation du tirage:",
+              "table": "LIGNE",
+              "enregistrement": "ENR-D",
+              "section": null
+            },
+            {
+              "code": "CDMOFD-22",
+              "type": "X",
+              "size": "1",
+              "description": "code motif solde du tirage:",
+              "table": "LIGNE",
+              "enregistrement": "ENR-D",
+              "section": null
+            },
+            {
+              "code": "TYDINC-22",
+              "type": "X",
+              "size": "1",
+              "description": "type du dernier événement traité :",
+              "table": "LIGNE",
+              "enregistrement": "ENR-D",
+              "section": null
+            },
+            {
+              "code": "CDSITDOS-61",
+              "type": "X",
+              "size": "1",
+              "description": "code situation de la garantie:",
+              "table": "LIGNE",
+              "enregistrement": "ENR-D",
+              "section": null
+            },
+            {
+              "code": "CDMOFD-61",
+              "type": "X",
+              "size": "1",
+              "description": "code motif de liquidation de la garantie",
+              "table": "LIGNE",
+              "enregistrement": "ENR-D",
+              "section": null
+            }
+          ]
+        },
+        "ENR-DEBSOC": {
+          "fields": []
+        },
+        "ENR-DLANC": {
+          "fields": []
+        },
+        "ENR-DCOMM": {
+          "fields": []
+        },
+        "ENR-DGEN": {
+          "fields": []
+        },
+        "ENR-DGENLIG": {
+          "fields": []
+        },
+        "ENR-DINTERF": {
+          "fields": []
+        },
+        "ENR-DINTERV": {
+          "fields": []
+        },
+        "ENR-DSTAT": {
+          "fields": []
+        },
+        "ENR-DPAY": {
+          "fields": []
+        },
+        "ENR-DDPT": {
+          "fields": []
+        },
+        "ENR-DDEPREC": {
+          "fields": []
+        },
+        "ENR-DGAR": {
+          "fields": []
+        },
+        "ENR-DPAL": {
+          "fields": []
+        },
+        "ENR-DACCP": {
+          "fields": []
+        },
+        "ENR-DASSP": {
+          "fields": []
+        },
+        "ENR-DCDF": {
+          "fields": []
+        },
+        "ENR-G08": {
+          "fields": []
+        },
+        "ENR-DINDEX": {
+          "fields": []
+        },
+        "ENR-DLOA": {
+          "fields": []
+        },
+        "ENR-DREMB": {
+          "fields": []
+        },
+        "ENR-DTIERS": {
+          "fields": []
+        },
+        "ENR-DSPEC": {
+          "fields": []
+        },
+        "ENR-DCASHBCK": {
+          "fields": []
+        },
+        "ENR-DCCRAP": {
+          "fields": []
+        },
+        "ENR-DCCRAT": {
+          "fields": []
+        },
+        "ENR-DCCDBL": {
+          "fields": []
+        },
+        "ENR-DCCMOD": {
+          "fields": []
+        },
+        "ENR-DCCTXFX": {
+          "fields": []
+        },
+        "ENR-DGRET": {
+          "fields": []
+        },
+        "ENR-32": {
+          "fields": []
+        },
+        "ENR-DCCREPECH": {
+          "fields": []
+        },
+        "ENR-DCDTTX": {
+          "fields": []
+        },
+        "ENR-DCDTTXTR": {
+          "fields": []
+        },
+        "ENR-DPLIMAUT": {
+          "fields": []
+        },
+        "ENR-DGENSLIG": {
+          "fields": []
+        },
+        "ENR-DCDTTIR": {
+          "fields": []
+        },
+        "ENR-DCDTGAR": {
+          "fields": []
+        },
+        "ENR-DCDTDEC": {
+          "fields": []
+        },
+        "ENR-DFCTTIR": {
+          "fields": []
+        },
+        "ENR-DFCTGAR": {
+          "fields": []
+        },
+        "ENR-DFCTDEC": {
+          "fields": []
+        },
+        "ENR-DRENTIR": {
+          "fields": []
+        },
+        "ENR-DRACHAT": {
+          "fields": []
+        },
+        "ENR-DCDTAPPEX": {
+          "fields": []
+        },
+        "ENR-DCCCHIND": {
+          "fields": []
+        },
+        "ENR-DCCTXFXPL": {
+          "fields": []
+        },
+        "ENR-DCDTINDEX": {
+          "fields": []
+        },
+        "ENR-DFORMTX": {
+          "fields": []
+        },
+        "ENR-DAMORTC": {
+          "fields": []
+        },
+        "ENR-DIMMOB": {
+          "fields": []
+        },
+        "ENR-DRESDEBL": {
+          "fields": []
+        },
+        "ENR-DASSC": {
+          "fields": []
+        },
+        "ENR-DRESLIG": {
+          "fields": []
+        },
+        "ENR-DRESSLIG": {
+          "fields": []
+        },
+        "ENR-TASS1": {
+          "fields": []
+        },
+        "ENR-TASS2": {
+          "fields": []
+        },
+        "ENR-TASS3": {
+          "fields": []
+        },
+        "ENR-TACC1": {
+          "fields": []
+        },
+        "ENR-TACC2": {
+          "fields": []
+        },
+        "ENR-TACC3": {
+          "fields": []
+        },
+        "ENR-TPTRES1": {
+          "fields": []
+        },
+        "ENR-TPTRES2": {
+          "fields": []
+        },
+        "ENR-TFONC": {
+          "fields": []
+        },
+        "ENR-DRESGAR": {
+          "fields": []
+        },
+        "ENR-TRIFL": {
+          "fields": []
+        },
+        "ENR-DTRACC": {
+          "fields": []
+        },
+        "ENR-DOAV": {
+          "fields": []
+        },
+        "ENR-TDAGD": {
+          "fields": []
+        },
+        "ENR-D68": {
+          "fields": []
+        },
+        "ENR-TITRI": {
+          "fields": []
+        },
+        "ENR-TRMDE": {
+          "fields": []
+        },
+        "ENR-DCHTX": {
+          "fields": []
+        },
+        "ENR-TICAP": {
+          "fields": []
+        },
+        "ENR-DREGL": {
+          "fields": []
+        },
+        "ENR-DOSS": {
+          "fields": []
+        }
+      },
+      "fields": [],
+      "description": "Fichier des dossiers de ligne"
+    },
+    "REVOLVING": {
+      "enregistrements": {
+        "ENR-E001": {
+          "fields": []
+        },
+        "ENR-D": {
+          "fields": [
+            {
+              "code": "TYSCPT-38",
+              "type": "X",
+              "size": "1",
+              "description": "type du sous-compte :",
+              "table": "REVOLVING",
+              "enregistrement": "ENR-D",
+              "section": null
+            },
+            {
+              "code": "CDSITDOS-50",
+              "type": "X",
+              "size": "1",
+              "description": "code situation du dossier :",
+              "table": "REVOLVING",
+              "enregistrement": "ENR-D",
+              "section": null
+            },
+            {
+              "code": "CDMOFD-50",
+              "type": "X",
+              "size": "1",
+              "description": "code motif solde du dossier :",
+              "table": "REVOLVING",
+              "enregistrement": "ENR-D",
+              "section": null
+            },
+            {
+              "code": "CDSITDOS-22",
+              "type": "X",
+              "size": "1",
+              "description": "code situation du dossier :",
+              "table": "REVOLVING",
+              "enregistrement": "ENR-D",
+              "section": null
+            },
+            {
+              "code": "CDMOFD-22",
+              "type": "X",
+              "size": "1",
+              "description": "code motif solde du dossier :",
+              "table": "REVOLVING",
+              "enregistrement": "ENR-D",
+              "section": null
+            },
+            {
+              "code": "TYDINC-22",
+              "type": "X",
+              "size": "1",
+              "description": "type du dernier événement traité :",
+              "table": "REVOLVING",
+              "enregistrement": "ENR-D",
+              "section": null
+            },
+            {
+              "code": "CDSITDOS-62",
+              "type": "X",
+              "size": "1",
+              "description": "code situation du dossier :",
+              "table": "REVOLVING",
+              "enregistrement": "ENR-D",
+              "section": null
+            }
+          ]
+        },
+        "ENR-DEBSOC": {
+          "fields": []
+        },
+        "ENR-DGENREV": {
+          "fields": []
+        },
+        "ENR-DGEN": {
+          "fields": []
+        },
+        "ENR-DINTERF": {
+          "fields": []
+        },
+        "ENR-DSTAT": {
+          "fields": []
+        },
+        "ENR-DPAY": {
+          "fields": []
+        },
+        "ENR-DCARTE": {
+          "fields": []
+        },
+        "ENR-D08": {
+          "fields": []
+        },
+        "ENR-DGAR": {
+          "fields": []
+        },
+        "ENR-DACCP": {
+          "fields": []
+        },
+        "ENR-DASSP": {
+          "fields": []
+        },
+        "ENR-DTIERS": {
+          "fields": []
+        },
+        "ENR-DINTERV": {
+          "fields": []
+        },
+        "ENR-DSPEC": {
+          "fields": []
+        },
+        "ENR-DGRET": {
+          "fields": []
+        },
+        "ENR-32": {
+          "fields": []
+        },
+        "ENR-DCDTTX": {
+          "fields": []
+        },
+        "ENR-DRESERV": {
+          "fields": []
+        },
+        "ENR-DSRES": {
+          "fields": []
+        },
+        "ENR-DFCTSCAM": {
+          "fields": []
+        },
+        "ENR-DFCTSCRV": {
+          "fields": []
+        },
+        "ENR-DRESREV": {
+          "fields": []
+        },
+        "ENR-TASS1": {
+          "fields": []
+        },
+        "ENR-TASS2": {
+          "fields": []
+        },
+        "ENR-TASS3": {
+          "fields": []
+        },
+        "ENR-TACC1": {
+          "fields": []
+        },
+        "ENR-TACC2": {
+          "fields": []
+        },
+        "ENR-TACC3": {
+          "fields": []
+        },
+        "ENR-TFONCA": {
+          "fields": []
+        },
+        "ENR-DIFFERE": {
+          "fields": []
+        },
+        "ENR-TFONCV": {
+          "fields": []
+        },
+        "ENR-DATT": {
+          "fields": []
+        },
+        "ENR-DTRACC": {
+          "fields": []
+        },
+        "ENR-DOAV": {
+          "fields": []
+        },
+        "ENR-TDAGD": {
+          "fields": []
+        },
+        "ENR-D68": {
+          "fields": []
+        },
+        "ENR-TITRI": {
+          "fields": []
+        },
+        "ENR-DREGL": {
+          "fields": []
+        },
+        "ENR-TICAP": {
+          "fields": []
+        },
+        "ENR-DOSS": {
+          "fields": []
+        }
+      },
+      "fields": [],
+      "description": "Fichier des dossiers revolving"
+    },
+    "ECHIMP": {
+      "enregistrements": {
+        "ENR-E001": {
+          "fields": []
+        },
+        "ENR-PILOT": {
+          "fields": []
+        },
+        "ENR-PAY": {
+          "fields": []
+        },
+        "ENR-PAYEUR": {
+          "fields": []
+        },
+        "ENR-ECHEANCE": {
+          "fields": []
+        },
+        "ENR-4": {
+          "fields": []
+        },
+        "ENR-ECHE": {
+          "fields": []
+        },
+        "ENR-REGLT": {
+          "fields": []
+        },
+        "ENR-STATS": {
+          "fields": []
+        },
+        "ENR-PLAN": {
+          "fields": []
+        },
+        "ENR-8": {
+          "fields": []
+        },
+        "ENR-FICTIF": {
+          "fields": []
+        },
+        "ENR-G": {
+          "fields": []
+        }
+      },
+      "fields": [],
+      "description": "Fichier des échéances impayées"
+    },
+    "EVTDOS": {
+      "enregistrements": {
+        "ENR-GLOBAL": {
+          "fields": []
+        },
+        "ENR-E001": {
+          "fields": []
+        },
+        "ENR-D": {
+          "fields": []
+        },
+        "ENR-DEVTCRD": {
+          "fields": []
+        },
+        "ENR-DEVTMDF": {
+          "fields": []
+        },
+        "ENR-D05": {
+          "fields": []
+        },
+        "ENR-DEVTMDFTR": {
+          "fields": []
+        },
+        "ENR-D07": {
+          "fields": []
+        },
+        "ENR-DEVTMODI": {
+          "fields": []
+        },
+        "ENR-DEVTMODIPART": {
+          "fields": []
+        },
+        "ENR-DEVTCHTX": {
+          "fields": []
+        },
+        "ENR-D10": {
+          "fields": []
+        },
+        "ENR-DEVTRBT": {
+          "fields": []
+        },
+        "ENR-DEVTRBTASS": {
+          "fields": []
+        },
+        "ENR-DEVTRBTACC": {
+          "fields": []
+        },
+        "ENR-DEVTRBTPART": {
+          "fields": []
+        },
+        "ENR-DEVTRBTACCP": {
+          "fields": []
+        },
+        "ENR-DEVTECH": {
+          "fields": []
+        },
+        "ENR-DEVTASS": {
+          "fields": []
+        },
+        "ENR-DEVTACC": {
+          "fields": []
+        },
+        "ENR-DEVTPART": {
+          "fields": []
+        },
+        "ENR-DEVTACCPART": {
+          "fields": []
+        },
+        "ENR-DTMBECHRV": {
+          "fields": []
+        },
+        "ENR-DTMBASSRV": {
+          "fields": []
+        },
+        "ENR-DTMBACCRV": {
+          "fields": []
+        },
+        "ENR-DEVTASSTH": {
+          "fields": []
+        },
+        "ENR-DEVTACCTH": {
+          "fields": []
+        },
+        "ENR-DEVTBASE": {
+          "fields": []
+        },
+        "ENR-DEVTREV": {
+          "fields": []
+        },
+        "ENR-DMODIQUANT": {
+          "fields": []
+        },
+        "ENR-D32": {
+          "fields": []
+        },
+        "ENR-DEVTPROM": {
+          "fields": []
+        }
+      },
+      "fields": [],
+      "description": "Fichier des évènements dossier"
+    },
+    "EVTIMP": {
+      "enregistrements": {
+        "ENR-E001": {
+          "fields": []
+        },
+        "ENR-MODIF": {
+          "fields": []
+        },
+        "ENR-CMD35": {
+          "fields": []
+        },
+        "ENR-3": {
+          "fields": []
+        },
+        "ENR-CAPIT": {
+          "fields": []
+        },
+        "ENR-GLOBAL": {
+          "fields": []
+        }
+      },
+      "fields": [],
+      "description": "Fichier des évènements impayés"
+    },
+    "ECHANT": {
+      "enregistrements": {
+        "ENR-E001": {
+          "fields": []
+        },
+        "ENR-ANTIECH": {
+          "fields": []
+        },
+        "ENR-ANTIPAY": {
+          "fields": []
+        },
+        "ENR-ANTIPAR": {
+          "fields": []
+        },
+        "ENR-ECHANT": {
+          "fields": []
+        }
+      },
+      "fields": [],
+      "description": "Fichier des échéances à anticiper"
+    },
+    "HISTDOS": {
+      "enregistrements": {
+        "ENR-E001": {
+          "fields": []
+        },
+        "ENR-INITIAL": {
+          "fields": []
+        },
+        "ENR-HISTDOS": {
+          "fields": []
+        },
+        "ENR-G": {
+          "fields": []
+        },
+        "ENR-TA": {
+          "fields": []
+        },
+        "ENR-ACCORD": {
+          "fields": []
+        },
+        "ENR-REPR": {
+          "fields": []
+        },
+        "ENR-DEBL": {
+          "fields": []
+        },
+        "ENR-DECH": {
+          "fields": []
+        },
+        "ENR-ECHE": {
+          "fields": []
+        },
+        "ENR-CHTAUX": {
+          "fields": []
+        },
+        "ENR-CHTAUXNA": {
+          "fields": []
+        },
+        "ENR-MAJDTPECH": {
+          "fields": []
+        },
+        "ENR-BLOCAGE": {
+          "fields": []
+        },
+        "ENR-RPEVEN": {
+          "fields": []
+        },
+        "ENR-RBT": {
+          "fields": []
+        },
+        "ENR-EXT": {
+          "fields": []
+        },
+        "ENR-ANTDEBL": {
+          "fields": []
+        },
+        "ENR-CDF": {
+          "fields": []
+        },
+        "ENR-TITRI": {
+          "fields": []
+        },
+        "ENR-PART": {
+          "fields": []
+        },
+        "ENR-BASC": {
+          "fields": []
+        },
+        "ENR-RPEVLI": {
+          "fields": []
+        },
+        "ENR-MODUL": {
+          "fields": []
+        },
+        "ENR-REPECH": {
+          "fields": []
+        },
+        "ENR-DPTXFIXE": {
+          "fields": []
+        },
+        "ENR-APPEL": {
+          "fields": []
+        },
+        "ENR-MIMP": {
+          "fields": []
+        },
+        "ENR-RIMP": {
+          "fields": []
+        },
+        "ENR-COM35": {
+          "fields": []
+        },
+        "ENR-59": {
+          "fields": []
+        },
+        "ENR-LETREL": {
+          "fields": []
+        },
+        "ENR-ANNDRIMP": {
+          "fields": []
+        },
+        "ENR-ARIM": {
+          "fields": []
+        },
+        "ENR-PLAN": {
+          "fields": []
+        },
+        "ENR-63": {
+          "fields": []
+        },
+        "ENR-REEM": {
+          "fields": []
+        },
+        "ENR-CAPIT": {
+          "fields": []
+        },
+        "ENR-RETREEM": {
+          "fields": []
+        },
+        "ENR-INHIB": {
+          "fields": []
+        },
+        "ENR-AVIS": {
+          "fields": []
+        },
+        "ENR-BASCIMP": {
+          "fields": []
+        },
+        "ENR-ANT": {
+          "fields": []
+        },
+        "ENR-LIQUID": {
+          "fields": []
+        },
+        "ENR-RPULI": {
+          "fields": []
+        },
+        "ENR-TXVAR": {
+          "fields": []
+        },
+        "ENR-FIN": {
+          "fields": []
+        },
+        "ENR-MAJHB": {
+          "fields": []
+        },
+        "ENR-MAJDE": {
+          "fields": []
+        },
+        "ENR-OUV": {
+          "fields": []
+        },
+        "ENR-AVICLODE": {
+          "fields": []
+        },
+        "ENR-CLODE": {
+          "fields": []
+        },
+        "ENR-DEPASS": {
+          "fields": []
+        },
+        "ENR-ENTFDS": {
+          "fields": []
+        },
+        "ENR-REVERS": {
+          "fields": []
+        },
+        "ENR-DOSHM": {
+          "fields": []
+        },
+        "ENR-VERS": {
+          "fields": []
+        },
+        "ENR-VRAC": {
+          "fields": []
+        },
+        "ENR-TRNSF": {
+          "fields": []
+        },
+        "ENR-EXTLIG": {
+          "fields": []
+        },
+        "ENR-RPENC": {
+          "fields": []
+        },
+        "ENR-DPAMOR": {
+          "fields": []
+        },
+        "ENR-DCHIND": {
+          "fields": []
+        },
+        "ENR-EVT": {
+          "fields": []
+        },
+        "ENR-FICTIF": {
+          "fields": []
+        },
+        "ENR-EXTR": {
+          "fields": [
+            {
+              "code": "CDTYPANT",
+              "type": "X",
+              "size": "1",
+              "description": "code type d'anticipation",
+              "table": "HISTDOS",
+              "enregistrement": "ENR-EXTR",
+              "section": null
+            },
+            {
+              "code": "CDOEXT-92",
+              "type": "X",
+              "size": "1",
+              "description": "code origine d'extourne",
+              "table": "HISTDOS",
+              "enregistrement": "ENR-EXTR",
+              "section": null
+            },
+            {
+              "code": "CDEVENT-04",
+              "type": "X",
+              "size": "1",
+              "description": "code évènement",
+              "table": "HISTDOS",
+              "enregistrement": "ENR-EXTR",
+              "section": null
+            }
+          ]
+        }
+      },
+      "fields": [],
+      "description": "Historique des dossiers"
+    },
+    "HISTDOSV": {
+      "enregistrements": {
+        "ENR-HISTDOS": {
+          "fields": []
+        },
+        "ENR-G": {
+          "fields": []
+        },
+        "ENR-ACCORD": {
+          "fields": []
+        },
+        "ENR-UTMON": {
+          "fields": []
+        },
+        "ENR-RAREVOLV": {
+          "fields": []
+        },
+        "ENR-RAV": {
+          "fields": []
+        },
+        "ENR-RELSSCPT": {
+          "fields": []
+        },
+        "ENR-RELPECH": {
+          "fields": []
+        },
+        "ENR-RELEVE": {
+          "fields": []
+        },
+        "ENR-REGL": {
+          "fields": []
+        },
+        "ENR-RELCHR": {
+          "fields": []
+        },
+        "ENR-SOLDECR": {
+          "fields": []
+        },
+        "ENR-EXTREV": {
+          "fields": []
+        },
+        "ENR-RESILIATION": {
+          "fields": []
+        },
+        "ENR-BLKDISP": {
+          "fields": []
+        },
+        "ENR-REVISION": {
+          "fields": []
+        },
+        "ENR-INACTIF": {
+          "fields": []
+        },
+        "ENR-TRFENC": {
+          "fields": []
+        },
+        "ENR-REPECHRV": {
+          "fields": []
+        },
+        "ENR-MODIQUANT": {
+          "fields": []
+        },
+        "ENR-REINT": {
+          "fields": []
+        },
+        "ENR-RECOND": {
+          "fields": []
+        },
+        "ENR-ANNREGL": {
+          "fields": []
+        },
+        "ENR-GSSIN": {
+          "fields": []
+        },
+        "ENR-ANONY": {
+          "fields": []
+        },
+        "ENR-VIRPREL": {
+          "fields": []
+        },
+        "ENR-RPANCREV": {
+          "fields": []
+        },
+        "ENR-RPANCRV": {
+          "fields": []
+        },
+        "ENR-EDLET": {
+          "fields": []
+        },
+        "ENR-PURGE": {
+          "fields": []
+        },
+        "ENR-ANTREV": {
+          "fields": []
+        },
+        "ENR-REPART": {
+          "fields": []
+        },
+        "ENR-PROPO": {
+          "fields": []
+        },
+        "ENR-PERTES": {
+          "fields": []
+        },
+        "ENR-LISSAGE": {
+          "fields": []
+        },
+        "ENR-SUREN": {
+          "fields": []
+        },
+        "ENR-DECH": {
+          "fields": []
+        },
+        "ENR-ECHE": {
+          "fields": []
+        },
+        "ENR-ENTFDS": {
+          "fields": []
+        },
+        "ENR-MIMP": {
+          "fields": []
+        },
+        "ENR-RIMP": {
+          "fields": []
+        },
+        "ENR-ANNDRIMP": {
+          "fields": []
+        },
+        "ENR-CAPIT": {
+          "fields": []
+        },
+        "ENR-RETREEM": {
+          "fields": []
+        },
+        "ENR-ANT": {
+          "fields": []
+        },
+        "ENR-BASCIMP": {
+          "fields": []
+        },
+        "ENR-DEBL": {
+          "fields": []
+        },
+        "ENR-RBT": {
+          "fields": []
+        },
+        "ENR-REPR": {
+          "fields": []
+        },
+        "ENR-GENE": {
+          "fields": []
+        },
+        "ENR-LRELFECHI": {
+          "fields": []
+        },
+        "ENR-LRELFPERI": {
+          "fields": []
+        },
+        "ENR-LRELFSPERI": {
+          "fields": []
+        },
+        "ENR-59": {
+          "fields": []
+        },
+        "ENR-LRELFEVTI": {
+          "fields": []
+        },
+        "ENR-60": {
+          "fields": []
+        },
+        "ENR-CHSITDOS": {
+          "fields": []
+        },
+        "ENR-REMB": {
+          "fields": []
+        },
+        "ENR-ANNDBL": {
+          "fields": []
+        },
+        "ENR-LRELFECH": {
+          "fields": []
+        },
+        "ENR-LRELFPER": {
+          "fields": []
+        },
+        "ENR-LRELFSPER": {
+          "fields": []
+        },
+        "ENR-LRELFEVT": {
+          "fields": []
+        },
+        "ENR-LRELFTYPE": {
+          "fields": []
+        },
+        "ENR-D75": {
+          "fields": []
+        },
+        "ENR-AVREVERS": {
+          "fields": []
+        },
+        "ENR-AVREV": {
+          "fields": []
+        },
+        "ENR-TITRI": {
+          "fields": []
+        },
+        "ENR-CHGTX": {
+          "fields": []
+        },
+        "ENR-APPREVDE": {
+          "fields": []
+        },
+        "ENR-MODIPART": {
+          "fields": []
+        },
+        "ENR-ECHREVERS": {
+          "fields": []
+        },
+        "ENR-EVTUTIL": {
+          "fields": []
+        },
+        "ENR-INITIAL": {
+          "fields": []
+        },
+        "ENR-FICTIF": {
+          "fields": []
+        }
+      },
+      "fields": [],
+      "description": "Historique des dossiers"
+    },
+    "IMADOSS": {
+      "enregistrements": {
+        "ENR-GLOBAL": {
+          "fields": []
+        },
+        "ENR-E001": {
+          "fields": []
+        },
+        "ENR-D": {
+          "fields": []
+        },
+        "ENR-DEBSOC": {
+          "fields": []
+        },
+        "ENR-DTIERS": {
+          "fields": []
+        },
+        "ENR-DREMB": {
+          "fields": []
+        },
+        "ENR-DLOA": {
+          "fields": []
+        },
+        "ENR-DCASHBCK": {
+          "fields": []
+        },
+        "ENR-DCDF": {
+          "fields": []
+        },
+        "ENR-DINTERF": {
+          "fields": []
+        },
+        "ENR-DINDEX": {
+          "fields": []
+        },
+        "ENR-DGEN": {
+          "fields": []
+        },
+        "ENR-DLANC": {
+          "fields": []
+        },
+        "ENR-DCOMM": {
+          "fields": []
+        },
+        "ENR-DPAY": {
+          "fields": []
+        },
+        "ENR-DGAR": {
+          "fields": []
+        },
+        "ENR-DPT": {
+          "fields": []
+        },
+        "ENR-DDEPREC": {
+          "fields": []
+        },
+        "ENR-DPAL": {
+          "fields": []
+        },
+        "ENR-DACCP": {
+          "fields": []
+        },
+        "ENR-DASSP": {
+          "fields": []
+        },
+        "ENR-DSTAT": {
+          "fields": []
+        },
+        "ENR-TFONC": {
+          "fields": []
+        },
+        "ENR-TICAP": {
+          "fields": []
+        },
+        "ENR-TASS1": {
+          "fields": []
+        },
+        "ENR-TASS2": {
+          "fields": []
+        },
+        "ENR-TACC1": {
+          "fields": []
+        },
+        "ENR-TACC2": {
+          "fields": []
+        },
+        "ENR-TPTRES1": {
+          "fields": []
+        },
+        "ENR-TPTRES2": {
+          "fields": []
+        },
+        "ENR-DGRET": {
+          "fields": []
+        },
+        "ENR-DCDTTX": {
+          "fields": []
+        },
+        "ENR-DCDTTXTR": {
+          "fields": []
+        },
+        "ENR-DCDTINDEX": {
+          "fields": []
+        },
+        "ENR-DFORMTX": {
+          "fields": []
+        },
+        "ENR-DAMORTC": {
+          "fields": []
+        },
+        "ENR-DIMMOB": {
+          "fields": []
+        },
+        "ENR-DRESDEBL": {
+          "fields": []
+        },
+        "ENR-DREGL": {
+          "fields": []
+        },
+        "ENR-TASS3": {
+          "fields": []
+        },
+        "ENR-TACC3": {
+          "fields": []
+        },
+        "ENR-DRACHAT": {
+          "fields": []
+        },
+        "ENR-TRMDE": {
+          "fields": []
+        },
+        "ENR-TITRI": {
+          "fields": []
+        },
+        "ENR-DASSC": {
+          "fields": []
+        },
+        "ENR-DEVTACCPART": {
+          "fields": []
+        },
+        "ENR-DEVTRBTACCP": {
+          "fields": []
+        },
+        "ENR-DINTERV": {
+          "fields": []
+        },
+        "ENR-DCHTX": {
+          "fields": []
+        },
+        "ENR-DSPEC": {
+          "fields": []
+        },
+        "ENR-DEVTCRD": {
+          "fields": []
+        },
+        "ENR-DEVTPART": {
+          "fields": []
+        },
+        "ENR-DEVTECH": {
+          "fields": []
+        },
+        "ENR-DEVTASS": {
+          "fields": []
+        },
+        "ENR-DEVTACC": {
+          "fields": []
+        },
+        "ENR-DEVTCHTX": {
+          "fields": []
+        },
+        "ENR-DCDTAPPEX": {
+          "fields": []
+        },
+        "ENR-DCCCHIND": {
+          "fields": []
+        },
+        "ENR-DCCTXFXPL": {
+          "fields": []
+        },
+        "ENR-DTRACC": {
+          "fields": []
+        },
+        "ENR-DEVTRBT": {
+          "fields": []
+        },
+        "ENR-DEVTRBTASS": {
+          "fields": []
+        },
+        "ENR-DEVTRBTACC": {
+          "fields": []
+        },
+        "ENR-DEVTRBTPART": {
+          "fields": []
+        },
+        "ENR-DEVTMDF": {
+          "fields": []
+        },
+        "ENR-DEVTMDFTR": {
+          "fields": []
+        },
+        "ENR-DEVTBASE": {
+          "fields": []
+        },
+        "ENR-DEVTMODI": {
+          "fields": []
+        },
+        "ENR-DEVTMODIPART": {
+          "fields": []
+        },
+        "ENR-DCCRAP": {
+          "fields": []
+        },
+        "ENR-DCCRAT": {
+          "fields": []
+        },
+        "ENR-DCCDBL": {
+          "fields": []
+        },
+        "ENR-DCCMOD": {
+          "fields": []
+        },
+        "ENR-DCCTXFX": {
+          "fields": []
+        },
+        "ENR-DCCREPECH": {
+          "fields": []
+        },
+        "ENR-TRIFL": {
+          "fields": []
+        },
+        "ENR-DMODIQUANT": {
+          "fields": []
+        },
+        "ENR-PILOTE": {
+          "fields": []
+        },
+        "ENR-FICTIF": {
+          "fields": []
+        }
+      },
+      "fields": [],
+      "description": "Fichier des images passées (hors impayés)"
+    },
+    "IMALIGN": {
+      "enregistrements": {
+        "ENR-GLOBAL": {
+          "fields": []
+        },
+        "ENR-E001": {
+          "fields": []
+        },
+        "ENR-D": {
+          "fields": []
+        },
+        "ENR-DEBSOC": {
+          "fields": []
+        },
+        "ENR-DTIERS": {
+          "fields": []
+        },
+        "ENR-DEVTRBTACCP": {
+          "fields": []
+        },
+        "ENR-DEVTACCPART": {
+          "fields": []
+        },
+        "ENR-DDEPREC": {
+          "fields": []
+        },
+        "ENR-DINTERF": {
+          "fields": []
+        },
+        "ENR-DINDEX": {
+          "fields": []
+        },
+        "ENR-DGEN": {
+          "fields": []
+        },
+        "ENR-DSTAT": {
+          "fields": []
+        },
+        "ENR-TICAP": {
+          "fields": []
+        },
+        "ENR-DPAY": {
+          "fields": []
+        },
+        "ENR-DGAR": {
+          "fields": []
+        },
+        "ENR-DDPT": {
+          "fields": []
+        },
+        "ENR-DEVTMODI": {
+          "fields": []
+        },
+        "ENR-DEVTMODIPART": {
+          "fields": []
+        },
+        "ENR-DACCP": {
+          "fields": []
+        },
+        "ENR-DINTERV": {
+          "fields": []
+        },
+        "ENR-DSPEC": {
+          "fields": []
+        },
+        "ENR-DIMMOB": {
+          "fields": []
+        },
+        "ENR-DRESDEBL": {
+          "fields": []
+        },
+        "ENR-DGRET": {
+          "fields": []
+        },
+        "ENR-DASSC": {
+          "fields": []
+        },
+        "ENR-DCDTTX": {
+          "fields": []
+        },
+        "ENR-DCDTTXTR": {
+          "fields": []
+        },
+        "ENR-DGENLIG": {
+          "fields": []
+        },
+        "ENR-DGENSLIG": {
+          "fields": []
+        },
+        "ENR-DPLIMAUT": {
+          "fields": []
+        },
+        "ENR-DCDTTIR": {
+          "fields": []
+        },
+        "ENR-DCDTGAR": {
+          "fields": []
+        },
+        "ENR-DCDTDEC": {
+          "fields": []
+        },
+        "ENR-DFCTTIR": {
+          "fields": []
+        },
+        "ENR-DFCTGAR": {
+          "fields": []
+        },
+        "ENR-DFCTDEC": {
+          "fields": []
+        },
+        "ENR-DRENTIR": {
+          "fields": []
+        },
+        "ENR-DREGL": {
+          "fields": []
+        },
+        "ENR-DLANC": {
+          "fields": []
+        },
+        "ENR-DCOMM": {
+          "fields": []
+        },
+        "ENR-DPAL": {
+          "fields": []
+        },
+        "ENR-DRACHAT": {
+          "fields": []
+        },
+        "ENR-DASSP": {
+          "fields": []
+        },
+        "ENR-DCDF": {
+          "fields": []
+        },
+        "ENR-DLOA": {
+          "fields": []
+        },
+        "ENR-DCHTX": {
+          "fields": []
+        },
+        "ENR-DRESLIG": {
+          "fields": []
+        },
+        "ENR-DRESSLIG": {
+          "fields": []
+        },
+        "ENR-DCDTINDEX": {
+          "fields": []
+        },
+        "ENR-DFORMTX": {
+          "fields": []
+        },
+        "ENR-DAMORTC": {
+          "fields": []
+        },
+        "ENR-TACC1": {
+          "fields": []
+        },
+        "ENR-TACC3": {
+          "fields": []
+        },
+        "ENR-TPTRES1": {
+          "fields": []
+        },
+        "ENR-TPTRES2": {
+          "fields": []
+        },
+        "ENR-TFONC": {
+          "fields": []
+        },
+        "ENR-DRESGAR": {
+          "fields": []
+        },
+        "ENR-DREMB": {
+          "fields": []
+        },
+        "ENR-DCASHBCK": {
+          "fields": []
+        },
+        "ENR-DCCRAP": {
+          "fields": []
+        },
+        "ENR-DCCRAT": {
+          "fields": []
+        },
+        "ENR-DCCDBL": {
+          "fields": []
+        },
+        "ENR-DCCMOD": {
+          "fields": []
+        },
+        "ENR-DCCTXFX": {
+          "fields": []
+        },
+        "ENR-DTRACC": {
+          "fields": []
+        },
+        "ENR-TRMDE": {
+          "fields": []
+        },
+        "ENR-DEVTCRD": {
+          "fields": []
+        },
+        "ENR-DEVTECH": {
+          "fields": []
+        },
+        "ENR-DEVTASS": {
+          "fields": []
+        },
+        "ENR-DEVTACC": {
+          "fields": []
+        },
+        "ENR-DEVTPART": {
+          "fields": []
+        },
+        "ENR-DEVTCHTX": {
+          "fields": []
+        },
+        "ENR-DCDTAPPEX": {
+          "fields": []
+        },
+        "ENR-DCCCHIND": {
+          "fields": []
+        },
+        "ENR-DCCTXFXPL": {
+          "fields": []
+        },
+        "ENR-DEVTMDF": {
+          "fields": []
+        },
+        "ENR-DEVTMDFTR": {
+          "fields": []
+        },
+        "ENR-TRIFL": {
+          "fields": []
+        },
+        "ENR-DEVTRBT": {
+          "fields": []
+        },
+        "ENR-DEVTRBTASS": {
+          "fields": []
+        },
+        "ENR-DEVTRBTACC": {
+          "fields": []
+        },
+        "ENR-DEVTBASE": {
+          "fields": []
+        },
+        "ENR-DEVTRBTPART": {
+          "fields": []
+        },
+        "ENR-PILOTE": {
+          "fields": []
+        },
+        "ENR-DCCREPECH": {
+          "fields": []
+        },
+        "ENR-TASS1": {
+          "fields": []
+        },
+        "ENR-TASS2": {
+          "fields": []
+        },
+        "ENR-TASS3": {
+          "fields": []
+        },
+        "ENR-TACC2": {
+          "fields": []
+        },
+        "ENR-TITRI": {
+          "fields": []
+        },
+        "ENR-DMODIQUANT": {
+          "fields": []
+        },
+        "ENR-FICTIF": {
+          "fields": []
+        }
+      },
+      "fields": [],
+      "description": "Fichier des images passées ligne"
+    },
+    "IMAIMP": {
+      "enregistrements": {
+        "ENR-GLOBAL": {
+          "fields": []
+        },
+        "ENR-4": {
+          "fields": []
+        },
+        "ENR-G4": {
+          "fields": []
+        },
+        "ENR-E001": {
+          "fields": []
+        },
+        "ENR-PAYEUR": {
+          "fields": []
+        },
+        "ENR-ECHEANCE": {
+          "fields": []
+        },
+        "ENR-REGLT": {
+          "fields": []
+        },
+        "ENR-STATS": {
+          "fields": []
+        },
+        "ENR-PLAN": {
+          "fields": []
+        },
+        "ENR-PILOT": {
+          "fields": []
+        },
+        "ENR-PAY": {
+          "fields": []
+        },
+        "ENR-ECHE": {
+          "fields": []
+        },
+        "ENR-ANTIECH": {
+          "fields": []
+        },
+        "ENR-6": {
+          "fields": []
+        },
+        "ENR-ANTIPAY": {
+          "fields": []
+        },
+        "ENR-ANTIPAR": {
+          "fields": []
+        },
+        "ENR-EVTMODIF": {
+          "fields": []
+        },
+        "ENR-5": {
+          "fields": []
+        },
+        "ENR-EVTCMD35": {
+          "fields": []
+        },
+        "ENR-EVTCAPIT": {
+          "fields": []
+        },
+        "ENR-ECHIMP": {
+          "fields": []
+        },
+        "ENR-EVTIMP": {
+          "fields": []
+        },
+        "ENR-ECHANT": {
+          "fields": []
+        }
+      },
+      "fields": [],
+      "description": "Fichier des images passées (impayés)"
+    },
+    "PILOTE": {
+      "enregistrements": {
+        "ENR-E001": {
+          "fields": []
+        },
+        "ENR-PRET": {
+          "fields": []
+        },
+        "ENR-DEBSOC": {
+          "fields": []
+        }
+      },
+      "fields": [],
+      "description": "Fichier pilote de traitement"
+    },
+    "TAMENS": {
+      "enregistrements": {
+        "ENR-TA": {
+          "fields": []
+        },
+        "ENR-TETE": {
+          "fields": []
+        }
+      },
+      "fields": [],
+      "description": "Fichier échéancier (pour gestion mensuelle)"
+    },
+    "TAMENSL": {
+      "enregistrements": {
+        "ENR-TA": {
+          "fields": []
+        },
+        "ENR-TETE": {
+          "fields": []
+        }
+      },
+      "fields": [],
+      "description": "Fichier échéancier des utilisations (pour gestion"
+    },
+    "ALIEN": {
+      "enregistrements": {
+        "ENR-ALIEN": {
+          "fields": []
+        },
+        "ENR-FICTIF": {
+          "fields": []
+        }
+      },
+      "fields": [],
+      "description": "(L3.0) Fichier ALIEN"
+    },
+    "MINIDOS": {
+      "enregistrements": {
+        "ENR-MINIDOS": {
+          "fields": []
+        },
+        "ENR-MINIDO1": {
+          "fields": []
+        }
+      },
+      "fields": [],
+      "description": "(L3.0) Fichier MINIDOS"
+    },
+    "AGENDA": {
+      "enregistrements": {
+        "ENR-AGENDA": {
+          "fields": []
+        },
+        "ENR-ALERTE": {
+          "fields": []
+        },
+        "ENR-D": {
+          "fields": []
+        },
+        "ENR-ACTION": {
+          "fields": []
+        },
+        "ENR-ALRPAR": {
+          "fields": []
+        },
+        "ENR-NOTE": {
+          "fields": []
+        },
+        "ENR-FICTIF": {
+          "fields": []
+        },
+        "ENR-E001": {
+          "fields": []
+        }
+      },
+      "fields": [],
+      "description": "Fichier agenda"
+    },
+    "AGCLE": {
+      "enregistrements": {
+        "ENR-AGCLE": {
+          "fields": []
+        },
+        "ENR-10": {
+          "fields": []
+        }
+      },
+      "fields": [],
+      "description": "(L3.1) Fichier des clés secondaires Agenda"
+    },
+    "HISTMVT": {
+      "enregistrements": {
+        "ENR-HISTMVT": {
+          "fields": []
+        },
+        "ENR-D": {
+          "fields": []
+        }
+      },
+      "fields": [],
+      "description": "Historique des mouvements"
+    }
+  },
+  "all_fields": {
+    "INTXCAL-18": [
+      {
+        "code": "INTXCAL-18",
+        "type": "X",
+        "size": "1",
+        "description": "inutilisé",
+        "table": "DOSSIER",
+        "enregistrement": "ENR-D",
+        "section": null
+      }
+    ],
+    "CDSITPAR-16": [
+      {
+        "code": "CDSITPAR-16",
+        "type": "X",
+        "size": "1",
+        "description": "code situation du participant :",
+        "table": "DOSSIER",
+        "enregistrement": "ENR-D",
+        "section": null
+      }
+    ],
+    "CDMODGES-16": [
+      {
+        "code": "CDMODGES-16",
+        "type": "X",
+        "size": "1",
+        "description": "mode de gestion du participant :",
+        "table": "DOSSIER",
+        "enregistrement": "ENR-D",
+        "section": null
+      }
+    ],
+    "INANTDBL-08": [
+      {
+        "code": "INANTDBL-08",
+        "type": "X",
+        "size": "1",
+        "description": "code anticipation de déblocage :",
+        "table": "DOSSIER",
+        "enregistrement": "ENR-D",
+        "section": null
+      }
+    ],
+    "CDSITC-22": [
+      {
+        "code": "CDSITC-22",
+        "type": "X",
+        "size": "1",
+        "description": "code situation comptable du dossier :",
+        "table": "DOSSIER",
+        "enregistrement": "ENR-D",
+        "section": null
+      }
+    ],
+    "CDSITDOS-22": [
+      {
+        "code": "CDSITDOS-22",
+        "type": "X",
+        "size": "1",
+        "description": "code situation du dossier :",
+        "table": "DOSSIER",
+        "enregistrement": "ENR-D",
+        "section": null
+      },
+      {
+        "code": "CDSITDOS-22",
+        "type": "X",
+        "size": "1",
+        "description": "code situation du tirage:",
+        "table": "LIGNE",
+        "enregistrement": "ENR-D",
+        "section": null
+      },
+      {
+        "code": "CDSITDOS-22",
+        "type": "X",
+        "size": "1",
+        "description": "code situation du dossier :",
+        "table": "REVOLVING",
+        "enregistrement": "ENR-D",
+        "section": null
+      }
+    ],
+    "CDMOFD-22": [
+      {
+        "code": "CDMOFD-22",
+        "type": "X",
+        "size": "1",
+        "description": "code motif solde du dossier :",
+        "table": "DOSSIER",
+        "enregistrement": "ENR-D",
+        "section": null
+      },
+      {
+        "code": "CDMOFD-22",
+        "type": "X",
+        "size": "1",
+        "description": "code motif solde du tirage:",
+        "table": "LIGNE",
+        "enregistrement": "ENR-D",
+        "section": null
+      },
+      {
+        "code": "CDMOFD-22",
+        "type": "X",
+        "size": "1",
+        "description": "code motif solde du dossier :",
+        "table": "REVOLVING",
+        "enregistrement": "ENR-D",
+        "section": null
+      }
+    ],
+    "INDAMOR-22": [
+      {
+        "code": "INDAMOR-22",
+        "type": "X",
+        "size": "1",
+        "description": "indicateur d'amortissement :",
+        "table": "DOSSIER",
+        "enregistrement": "ENR-D",
+        "section": null
+      }
+    ],
+    "TYPECH-22": [
+      {
+        "code": "TYPECH-22",
+        "type": "X",
+        "size": "1",
+        "description": "(4 fois)",
+        "table": "DOSSIER",
+        "enregistrement": "ENR-D",
+        "section": null
+      }
+    ],
+    "TYPECHC-22": [
+      {
+        "code": "TYPECHC-22",
+        "type": "X",
+        "size": "1",
+        "description": "(4 fois)",
+        "table": "DOSSIER",
+        "enregistrement": "ENR-D",
+        "section": null
+      }
+    ],
+    "TYDINC-22": [
+      {
+        "code": "TYDINC-22",
+        "type": "X",
+        "size": "1",
+        "description": "type du dernier événement traité :",
+        "table": "DOSSIER",
+        "enregistrement": "ENR-D",
+        "section": null
+      },
+      {
+        "code": "TYDINC-22",
+        "type": "X",
+        "size": "1",
+        "description": "type du dernier événement traité :",
+        "table": "LIGNE",
+        "enregistrement": "ENR-D",
+        "section": null
+      },
+      {
+        "code": "TYDINC-22",
+        "type": "X",
+        "size": "1",
+        "description": "type du dernier événement traité :",
+        "table": "REVOLVING",
+        "enregistrement": "ENR-D",
+        "section": null
+      }
+    ],
+    "CDPNR-22": [
+      {
+        "code": "CDPNR-22",
+        "type": "X",
+        "size": "1",
+        "description": "code prêt nouveau",
+        "table": "DOSSIER",
+        "enregistrement": "ENR-D",
+        "section": null
+      }
+    ],
+    "INANTPAY-48": [
+      {
+        "code": "INANTPAY-48",
+        "type": "X",
+        "size": "1",
+        "description": "indicateurs d'anticipation (4 postes)",
+        "table": "DOSSIER",
+        "enregistrement": "ENR-D",
+        "section": null
+      }
+    ],
+    "INAETA1-49": [
+      {
+        "code": "INAETA1-49",
+        "type": "X",
+        "size": "1",
+        "description": "indicateur d'édition à effectuer lors de la prochaine échéance d'intérêt suite à",
+        "table": "DOSSIER",
+        "enregistrement": "ENR-D",
+        "section": null
+      }
+    ],
+    "INAETA2-49": [
+      {
+        "code": "INAETA2-49",
+        "type": "X",
+        "size": "1",
+        "description": "indicateur d'édition à effectuer lors de la prochaine échéance d'intérêt + 1 suite à",
+        "table": "DOSSIER",
+        "enregistrement": "ENR-D",
+        "section": null
+      }
+    ],
+    "TYCHTX-49": [
+      {
+        "code": "TYCHTX-49",
+        "type": "X",
+        "size": "1",
+        "description": "type de l'échéance sur laquelle porte le chgt de taux :",
+        "table": "DOSSIER",
+        "enregistrement": "ENR-D",
+        "section": null
+      }
+    ],
+    "CDSITDEC-38": [
+      {
+        "code": "CDSITDEC-38",
+        "type": "X",
+        "size": "1",
+        "description": "code situation des découverts:",
+        "table": "LIGNE",
+        "enregistrement": "ENR-D",
+        "section": null
+      }
+    ],
+    "CDSITDOS-50": [
+      {
+        "code": "CDSITDOS-50",
+        "type": "X",
+        "size": "1",
+        "description": "code situation de la ligne:",
+        "table": "LIGNE",
+        "enregistrement": "ENR-D",
+        "section": null
+      },
+      {
+        "code": "CDSITDOS-50",
+        "type": "X",
+        "size": "1",
+        "description": "code situation du dossier :",
+        "table": "REVOLVING",
+        "enregistrement": "ENR-D",
+        "section": null
+      }
+    ],
+    "CDSITDOS-51": [
+      {
+        "code": "CDSITDOS-51",
+        "type": "X",
+        "size": "1",
+        "description": "code situation de la sous-ligne:",
+        "table": "LIGNE",
+        "enregistrement": "ENR-D",
+        "section": null
+      }
+    ],
+    "CDSITDOS-61": [
+      {
+        "code": "CDSITDOS-61",
+        "type": "X",
+        "size": "1",
+        "description": "code situation de la garantie:",
+        "table": "LIGNE",
+        "enregistrement": "ENR-D",
+        "section": null
+      }
+    ],
+    "CDMOFD-61": [
+      {
+        "code": "CDMOFD-61",
+        "type": "X",
+        "size": "1",
+        "description": "code motif de liquidation de la garantie",
+        "table": "LIGNE",
+        "enregistrement": "ENR-D",
+        "section": null
+      }
+    ],
+    "TYSCPT-38": [
+      {
+        "code": "TYSCPT-38",
+        "type": "X",
+        "size": "1",
+        "description": "type du sous-compte :",
+        "table": "REVOLVING",
+        "enregistrement": "ENR-D",
+        "section": null
+      }
+    ],
+    "CDMOFD-50": [
+      {
+        "code": "CDMOFD-50",
+        "type": "X",
+        "size": "1",
+        "description": "code motif solde du dossier :",
+        "table": "REVOLVING",
+        "enregistrement": "ENR-D",
+        "section": null
+      }
+    ],
+    "CDSITDOS-62": [
+      {
+        "code": "CDSITDOS-62",
+        "type": "X",
+        "size": "1",
+        "description": "code situation du dossier :",
+        "table": "REVOLVING",
+        "enregistrement": "ENR-D",
+        "section": null
+      }
+    ],
+    "CDTYPANT": [
+      {
+        "code": "CDTYPANT",
+        "type": "X",
+        "size": "1",
+        "description": "code type d'anticipation",
+        "table": "HISTDOS",
+        "enregistrement": "ENR-EXTR",
+        "section": null
+      }
+    ],
+    "CDOEXT-92": [
+      {
+        "code": "CDOEXT-92",
+        "type": "X",
+        "size": "1",
+        "description": "code origine d'extourne",
+        "table": "HISTDOS",
+        "enregistrement": "ENR-EXTR",
+        "section": null
+      }
+    ],
+    "CDEVENT-04": [
+      {
+        "code": "CDEVENT-04",
+        "type": "X",
+        "size": "1",
+        "description": "code évènement",
+        "table": "HISTDOS",
+        "enregistrement": "ENR-EXTR",
+        "section": null
+      }
+    ]
+  },
+  "all_values": {}
+}

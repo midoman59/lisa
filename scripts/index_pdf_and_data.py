@@ -177,6 +177,7 @@ def ingest_documents(folder: Path) -> int:
 
     # Process JSON files
     json_files = [
+        ("src/data/field_codes.json", "field_codes"),  # ← AJOUT: Codes de champs avec définitions
         ("src/data/dossiers.json", "dossier"),
         ("src/data/enregistrements.json", "enregistrement"),
     ]
