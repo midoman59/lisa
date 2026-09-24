@@ -6,7 +6,7 @@ Agent Data - Interroge les données sur les dossiers, enregistrements, événeme
 import os
 import json
 from dotenv import load_dotenv
-from .data_loader import DataLoader
+from .rag_loader import RAGLoader
 from openai import AzureOpenAI
 
 # Load environment
@@ -16,7 +16,7 @@ class DataAgent:
     """Agent qui interroge les données locales et utilise le LLM pour répondre"""
 
     def __init__(self):
-        self.loader = DataLoader()
+        self.loader = RAGLoader()
         self.field_descriptions = self._load_field_descriptions()
 
         # Initialize Azure OpenAI client
@@ -36,49 +36,38 @@ class DataAgent:
             return {}
 
     def _get_context(self, query: str) -> str:
-        """Prépare le contexte basé sur la requête avec descriptions LS V3.8.0"""
-        context = "CONTEXTE DE DONNÉES LS V3.8.0 (Loan Servicing):\n"
+        """Prépare le contexte basé sur RAG (PDF + données indexées dans Azure Search)"""
+        context = "CONTEXTE RAG - LS V3.8.0 (PDF + DONNÉES):\n"
+        context += "=" * 60 + "\n"
 
-        # Dictionnaire des descriptions de champs (pour contextualiser l'IA)
+        # Récupérer les résultats du RAG (top 5 documents pertinents)
+        rag_results = self.loader.search_documents(query, top=5)
+
+        if rag_results:
+            context += "\n📚 DOCUMENTS TROUVÉS (via RAG):\n"
+            for i, doc in enumerate(rag_results, 1):
+                context += f"\n{i}. [{doc['type'].upper()}] {doc['source']}\n"
+                context += f"   Score: {doc['score']:.2f}\n"
+                # Limiter le contenu pour ne pas surcharger le prompt
+                content = doc['content'][:400]
+                context += f"   {content}{'...' if len(doc['content']) > 400 else ''}\n"
+        else:
+            context += "\n⚠️  Aucun document trouvé dans le RAG\n"
+
+        # Ajouter le dictionnaire des champs si disponible
         if self.field_descriptions:
-            context += "\n🔍 DICTIONNAIRE DES CHAMPS (LS V3.8.0):\n"
-            context += "━" * 60 + "\n"
-            context += "TABLE DGEN (Données Générales du Dossier):\n"
-            for field, desc in self.field_descriptions.get("dgen", {}).items():
-                context += f"  • {field}: {desc}\n"
+            context += "\n" + "=" * 60 + "\n"
+            context += "🔍 DICTIONNAIRE LS V3.8.0 (pour contexte supplémentaire):\n"
 
-            context += "\nTABLE DPAY (Données de Payeur):\n"
-            for field, desc in self.field_descriptions.get("dpay", {}).items():
-                context += f"  • {field}: {desc}\n"
+            dgen_count = len(self.field_descriptions.get("dgen", {}))
+            dpay_count = len(self.field_descriptions.get("dpay", {}))
+            dgar_count = len(self.field_descriptions.get("dgar", {}))
 
-            context += "\nTABLE DGAR (Données de Garanties):\n"
-            for field, desc in self.field_descriptions.get("dgar", {}).items():
-                context += f"  • {field}: {desc}\n"
+            context += f"  • DGEN: {dgen_count} champs\n"
+            context += f"  • DPAY: {dpay_count} champs\n"
+            context += f"  • DGAR: {dgar_count} champs\n"
 
-            context += "\nSÉMANTIQUE & CODES (pour interpréter les valeurs):\n"
-            for code, meaning in self.field_descriptions.get("contexte_semantique", {}).items():
-                context += f"  • {code}: {meaning}\n"
-            context += "━" * 60 + "\n"
-
-        # Statistiques
-        stats = self.loader.get_statistics()
-        context += f"\n📊 STATISTIQUES:\n{json.dumps(stats, indent=2)}\n"
-
-        # Dossiers correspondants avec structures LS V3.8.0
-        dossiers = self.loader.search_dossiers(query)
-        if dossiers:
-            context += f"\n📋 DOSSIERS TROUVÉS (structures DGEN+DPAY+DGAR):\n"
-
-            # Ajouter les détails complets pour les dossiers trouvés
-            for d in dossiers:
-                summary = self.loader.get_dossier_summary(d.get("id"))
-                context += f"\nDossier: {d.get('numero_dossier')} (Client: {d.get('client_nom')})\n"
-                context += json.dumps(summary, indent=2, default=str, ensure_ascii=False) + "\n"
-
-        # Événements récents
-        recents = self.loader.get_evenements_recents(5)
-        context += f"\n📅 ÉVÉNEMENTS RÉCENTS:\n{json.dumps(recents, indent=2, ensure_ascii=False)}\n"
-
+        context += "\n" + "=" * 60 + "\n"
         return context
 
     def query(self, user_query: str) -> str:
