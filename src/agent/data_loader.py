@@ -10,8 +10,12 @@ from typing import List, Dict, Any
 class DataLoader:
     """Charge et gère les données locales (Dossiers, Enregistrements, Événements)"""
 
-    def __init__(self, data_dir: str = "data"):
-        self.data_dir = Path(data_dir)
+    def __init__(self, data_dir: str = None):
+        if data_dir is None:
+            # Cherche les données dans src/data
+            self.data_dir = Path(__file__).parent.parent / "data"
+        else:
+            self.data_dir = Path(data_dir)
         self.dossiers: List[Dict[str, Any]] = []
         self.enregistrements: List[Dict[str, Any]] = []
         self.evenements: List[Dict[str, Any]] = []

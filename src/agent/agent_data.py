@@ -6,7 +6,7 @@ Agent Data - Interroge les données sur les dossiers, enregistrements, événeme
 import os
 import json
 from dotenv import load_dotenv
-from data_loader import DataLoader
+from .data_loader import DataLoader
 from openai import AzureOpenAI
 
 # Load environment
