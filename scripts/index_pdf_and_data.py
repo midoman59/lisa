@@ -21,10 +21,10 @@ import pdfplumber
 
 load_dotenv()
 
-# Configuration - OPTIMISÉ POUR GARDER CONTEXTE COMPLET
+# Configuration - OPTIMIS POUR GARDER CONTEXTE COMPLET
 # Chunks plus gros = meilleur contexte = moins de confusion entre champs
-CHUNK_SIZE = 2_500  # Augmenté de 1000 pour garder les définitions complètes
-CHUNK_OVERLAP = 400  # Augmenté proportionnellement pour meilleure continuité
+CHUNK_SIZE = 2_500  # Augment de 1000 pour garder les dfinitions compltes
+CHUNK_OVERLAP = 400  # Augment proportionnellement pour meilleure continuit
 EMBEDDING_DIMENSIONS = 3_072
 
 # Environment variables
@@ -36,8 +36,8 @@ AZURE_SEARCH_API_KEY = os.getenv("AZURE_SEARCH_API_KEY")
 AZURE_SEARCH_INDEX = os.getenv("AZURE_SEARCH_INDEX_NAME", "lisa-documents")
 
 if not all([AZURE_OPENAI_ENDPOINT, AZURE_OPENAI_API_KEY, AZURE_SEARCH_ENDPOINT, AZURE_SEARCH_API_KEY]):
-    print("❌ Erreur: Manque de variables d'environnement")
-    print("   Vérifie .env: AZURE_OPENAI_*, AZURE_SEARCH_*")
+    print(" Erreur: Manque de variables d'environnement")
+    print("   Vrifie .env: AZURE_OPENAI_*, AZURE_SEARCH_*")
     exit(1)
 
 
@@ -181,7 +181,7 @@ def embed_batch(client: OpenAI, deployment: str, texts: list[str], batch_size: i
         batch = texts[start:start + batch_size]
         response = client.embeddings.create(model=deployment, input=batch)
         vectors.extend(item.embedding for item in response.data)
-        print(f"      ⏳ Embeddings {min(start + len(batch), len(texts))}/{len(texts)}...", end="\r")
+        print(f"       Embeddings {min(start + len(batch), len(texts))}/{len(texts)}...", end="\r")
     return vectors
 
 
@@ -207,10 +207,10 @@ def delete_index(endpoint: str, api_key: str, index_name: str) -> None:
     url = f"{endpoint}/indexes/{index_name}?api-version=2024-07-01"
     try:
         request_search("DELETE", url, api_key)
-        print(f"✅ Index '{index_name}' supprimé")
+        print(f" Index '{index_name}' supprim")
     except RuntimeError as e:
         if "404" in str(e):
-            print(f"ℹ️  Index '{index_name}' n'existe pas (OK)")
+            print(f"  Index '{index_name}' n'existe pas (OK)")
         else:
             raise
 
@@ -239,17 +239,17 @@ def ensure_index(endpoint: str, api_key: str, index_name: str) -> None:
         },
     }
     request_search("PUT", url, api_key, index)
-    print(f"✅ Index '{index_name}' recréé et vide")
+    print(f" Index '{index_name}' recr et vide")
 
 
 def ingest_documents(folder: Path) -> int:
     """Ingest PDF and JSON documents into Azure Search."""
     print("=" * 70)
-    print("📚 INDEXATION INTELLIGENTE: PDF + JSON → AZURE SEARCH")
+    print(" INDEXATION INTELLIGENTE: PDF + JSON  AZURE SEARCH")
     print("=" * 70)
 
     client, embedding_deployment = get_openai_client()
-    print(f"\n🔐 Configuration:")
+    print(f"\n Configuration:")
     print(f"   Endpoint Search: {AZURE_SEARCH_ENDPOINT}")
     print(f"   Index: {AZURE_SEARCH_INDEX}")
     print(f"   Embedding: {embedding_deployment}")
@@ -262,7 +262,7 @@ def ingest_documents(folder: Path) -> int:
     # TODO: Add PDF indexing with improved Mermaid transformation later
     # pdf_path = Path("docs/LS_V3.8.0_Fichiers_Permanents.pdf")
     # if pdf_path.exists():
-    #     print(f"\n📄 Traitement PDF: {pdf_path.name}")
+    #     print(f"\n Traitement PDF: {pdf_path.name}")
     #     ...
 
     # Process field_codes.json separately: one readable document per field,
@@ -271,9 +271,9 @@ def ingest_documents(folder: Path) -> int:
     # thousands of fields - one-by-one embedding would take hours.
     field_codes_path = Path("src/data/field_codes.json")
     if field_codes_path.exists():
-        print(f"   📋 Traitement JSON: {field_codes_path.name} (documents lisibles par champ)")
+        print(f"    Traitement JSON: {field_codes_path.name} (documents lisibles par champ)")
         field_docs = list(extract_field_codes(field_codes_path))
-        print(f"      {len(field_docs)} documents à embedder...")
+        print(f"      {len(field_docs)} documents  embedder...")
         texts = [text for text, _ in field_docs]
         vectors = embed_batch(client, embedding_deployment, texts)
         print()  # newline after progress carriage returns
@@ -292,9 +292,9 @@ def ingest_documents(folder: Path) -> int:
                 "row_number": metadata.get("row_number"),
                 "chunk_number": 1,
             })
-        print(f"   ✅ {field_codes_path.name}: {len(field_docs)} documents indexés")
+        print(f"    {field_codes_path.name}: {len(field_docs)} documents indexs")
     else:
-        print(f"   ⚠️  Fichier non trouvé: {field_codes_path}")
+        print(f"     Fichier non trouv: {field_codes_path}")
 
     # Process remaining JSON files (generic chunking)
     json_files = [
@@ -306,10 +306,10 @@ def ingest_documents(folder: Path) -> int:
     for json_path, doc_type in json_files:
         path = Path(json_path)
         if not path.exists():
-            print(f"   ⚠️  Fichier non trouvé: {json_path}")
+            print(f"     Fichier non trouv: {json_path}")
             continue
 
-        print(f"   📋 Traitement JSON: {path.name}")
+        print(f"    Traitement JSON: {path.name}")
         for text, metadata in extract_json(path):
             for chunk_number, content in enumerate(chunks(text), start=1):
                 identity = f"{path.resolve()}:{metadata}:{chunk_number}"
@@ -325,11 +325,11 @@ def ingest_documents(folder: Path) -> int:
                     "row_number": metadata.get("row_number"),
                     "chunk_number": chunk_number,
                 })
-        print(f"   ✅ {path.name}: chunks indexés")
+        print(f"    {path.name}: chunks indexs")
 
     # Upload in batches
     if documents:
-        print(f"\n📤 Upload de {len(documents)} documents...")
+        print(f"\n Upload de {len(documents)} documents...")
         url = f"{AZURE_SEARCH_ENDPOINT}/indexes/{AZURE_SEARCH_INDEX}/docs/index?api-version=2024-07-01"
 
         for start in range(0, len(documents), 100):
@@ -338,10 +338,10 @@ def ingest_documents(folder: Path) -> int:
             failures = [item for item in result.get("value", []) if not item.get("status")]
             if failures:
                 raise RuntimeError(f"Failed to index documents: {failures}")
-            print(f"   ✅ {min(start + len(batch), len(documents))}/{len(documents)} documents indexés")
+            print(f"    {min(start + len(batch), len(documents))}/{len(documents)} documents indexs")
 
     print("\n" + "=" * 70)
-    print(f"✅ INDEXATION TERMINÉE: {len(documents)} documents")
+    print(f" INDEXATION TERMINE: {len(documents)} documents")
     print("=" * 70)
     return len(documents)
 
