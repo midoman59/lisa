@@ -68,15 +68,94 @@ def extract_pdf(path: Path) -> Iterable[tuple[str, dict[str, object]]]:
                 yield text, {"page": page_number}
 
 
+def flatten_to_text(item: dict, indent: int = 0) -> list[str]:
+    """Convert a (possibly nested) dict into readable 'label: value' lines.
+
+    Raw JSON syntax (braces, quotes, commas) adds noise that hurts embedding
+    relevance - plain "key: value" text embeds much closer to natural-language
+    questions about the same data.
+    """
+    lines = []
+    pad = "  " * indent
+    for key, value in item.items():
+        if isinstance(value, dict):
+            lines.append(f"{pad}{key}:")
+            lines.extend(flatten_to_text(value, indent + 1))
+        elif value is None:
+            continue
+        else:
+            lines.append(f"{pad}{key}: {value}")
+    return lines
+
+
 def extract_json(path: Path) -> Iterable[tuple[str, dict[str, object]]]:
-    """Extract structured data from JSON files."""
+    """Extract structured data from JSON files as readable text, one document per row."""
     with open(path, "r", encoding="utf-8") as f:
         data = json.load(f)
 
     items = data if isinstance(data, list) else [data]
     for row_number, item in enumerate(items, start=1):
-        text = json.dumps(item, ensure_ascii=False, indent=2)
+        text = "\n".join(flatten_to_text(item))
         yield text, {"sheet": path.stem, "row_number": row_number}
+
+
+def extract_field_codes(path: Path) -> Iterable[tuple[str, dict[str, object]]]:
+    """Extract field_codes.json as discrete, human-readable per-field documents.
+
+    Dumping the whole JSON as one blob and mechanically chunking it at N chars
+    fragments the structure and buries each field's values in noisy syntax,
+    which tanks retrieval relevance. Instead: one small, self-contained,
+    natural-language document per (table, field_code), scoped correctly since
+    the same field name can have different value legends per table.
+    """
+    with open(path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    field_values: dict = data.get("field_values", {})  # table -> field_code -> {value: desc}
+    all_fields: dict = data.get("all_fields", {})  # field_code -> [ {table, description, type, size, ...} ]
+
+    desc_lookup: dict[tuple[str, str], dict] = {}
+    for field_code, occurrences in all_fields.items():
+        for occ in occurrences:
+            table = occ.get("table")
+            if table:
+                desc_lookup[(table, field_code)] = occ
+
+    seen: set[tuple[str, str]] = set()
+
+    # 1) One document per (table, field_code) that HAS a value legend
+    for table, fields in field_values.items():
+        for field_code, values in fields.items():
+            desc_info = desc_lookup.get((table, field_code), {})
+            description = (desc_info.get("description") or "").rstrip(" :")
+            lines = [
+                f"Table: {table}",
+                f"Champ: {field_code}" + (f" ({description})" if description else ""),
+                "Valeurs possibles:",
+            ]
+            for val_code, val_desc in values.items():
+                lines.append(f"  {val_code} = {val_desc}")
+            text = "\n".join(lines)
+            yield text, {"sheet": f"field_values_{table}_{field_code}", "row_number": 1}
+            seen.add((table, field_code))
+
+    # 2) One document per remaining (table, field_code) WITHOUT a value legend
+    for field_code, occurrences in all_fields.items():
+        for occ in occurrences:
+            table = occ.get("table")
+            key = (table, field_code)
+            if not table or key in seen:
+                continue
+            seen.add(key)
+            lines = [
+                f"Table: {table}",
+                f"Enregistrement: {occ.get('enregistrement', '')}",
+                f"Champ: {field_code}",
+                f"Type: {occ.get('type', '')}({occ.get('size', '')})",
+                f"Description: {occ.get('description', '')}",
+            ]
+            text = "\n".join(lines)
+            yield text, {"sheet": f"field_def_{table}_{field_code}", "row_number": 1}
 
 
 def get_openai_client() -> tuple[OpenAI, str]:
@@ -93,6 +172,17 @@ def get_openai_client() -> tuple[OpenAI, str]:
 def embed(client: OpenAI, deployment: str, text: str) -> list[float]:
     """Create embedding for text."""
     return client.embeddings.create(model=deployment, input=text).data[0].embedding
+
+
+def embed_batch(client: OpenAI, deployment: str, texts: list[str], batch_size: int = 100) -> list[list[float]]:
+    """Create embeddings for many texts in batched API calls (much faster than one-by-one)."""
+    vectors: list[list[float]] = []
+    for start in range(0, len(texts), batch_size):
+        batch = texts[start:start + batch_size]
+        response = client.embeddings.create(model=deployment, input=batch)
+        vectors.extend(item.embedding for item in response.data)
+        print(f"      ⏳ Embeddings {min(start + len(batch), len(texts))}/{len(texts)}...", end="\r")
+    return vectors
 
 
 def request_search(method: str, url: str, api_key: str, payload: object | None = None) -> dict:
@@ -112,8 +202,23 @@ def request_search(method: str, url: str, api_key: str, payload: object | None =
         raise RuntimeError(f"Azure Search {method} {url} failed: {message}") from error
 
 
+def delete_index(endpoint: str, api_key: str, index_name: str) -> None:
+    """Delete index if it exists."""
+    url = f"{endpoint}/indexes/{index_name}?api-version=2024-07-01"
+    try:
+        request_search("DELETE", url, api_key)
+        print(f"✅ Index '{index_name}' supprimé")
+    except RuntimeError as e:
+        if "404" in str(e):
+            print(f"ℹ️  Index '{index_name}' n'existe pas (OK)")
+        else:
+            raise
+
 def ensure_index(endpoint: str, api_key: str, index_name: str) -> None:
     """Create or update Azure Search index with vector search configuration."""
+    # Nettoyer d'abord l'index existant
+    delete_index(endpoint, api_key, index_name)
+
     url = f"{endpoint}/indexes/{index_name}?api-version=2024-07-01"
     index = {
         "name": index_name,
@@ -134,7 +239,7 @@ def ensure_index(endpoint: str, api_key: str, index_name: str) -> None:
         },
     }
     request_search("PUT", url, api_key, index)
-    print(f"✅ Index '{index_name}' ready")
+    print(f"✅ Index '{index_name}' recréé et vide")
 
 
 def ingest_documents(folder: Path) -> int:
@@ -153,33 +258,49 @@ def ingest_documents(folder: Path) -> int:
 
     documents = []
 
-    # Process PDF
-    pdf_path = Path("docs/LS_V3.8.0_Fichiers_Permanents.pdf")
-    if pdf_path.exists():
-        print(f"\n📄 Traitement PDF: {pdf_path.name}")
-        for text, metadata in extract_pdf(pdf_path):
-            for chunk_number, content in enumerate(chunks(text), start=1):
-                identity = f"{pdf_path.resolve()}:{metadata}:{chunk_number}"
-                print(f"   ⏳ Embedding chunk {chunk_number}...", end="\r")
-                documents.append({
-                    "@search.action": "mergeOrUpload",
-                    "id": hashlib.sha256(identity.encode("utf-8")).hexdigest(),
-                    "content": content,
-                    "content_vector": embed(client, embedding_deployment, content),
-                    "source": pdf_path.name,
-                    "source_type": "pdf",
-                    "page": metadata.get("page"),
-                    "sheet": None,
-                    "row_number": None,
-                    "chunk_number": chunk_number,
-                })
-        print(f"   ✅ PDF: {len([d for d in documents if d['source_type'] == 'pdf'])} chunks\n")
+    # Process PDF - SKIPPED FOR NOW (indexing JSON only)
+    # TODO: Add PDF indexing with improved Mermaid transformation later
+    # pdf_path = Path("docs/LS_V3.8.0_Fichiers_Permanents.pdf")
+    # if pdf_path.exists():
+    #     print(f"\n📄 Traitement PDF: {pdf_path.name}")
+    #     ...
 
-    # Process JSON files
+    # Process field_codes.json separately: one readable document per field,
+    # NOT chunked mechanically (each doc is already small and self-contained).
+    # Embedded in batches (100 texts/call) since the full schema now has
+    # thousands of fields - one-by-one embedding would take hours.
+    field_codes_path = Path("src/data/field_codes.json")
+    if field_codes_path.exists():
+        print(f"   📋 Traitement JSON: {field_codes_path.name} (documents lisibles par champ)")
+        field_docs = list(extract_field_codes(field_codes_path))
+        print(f"      {len(field_docs)} documents à embedder...")
+        texts = [text for text, _ in field_docs]
+        vectors = embed_batch(client, embedding_deployment, texts)
+        print()  # newline after progress carriage returns
+
+        for (text, metadata), vector in zip(field_docs, vectors):
+            identity = f"{field_codes_path.resolve()}:{metadata}"
+            documents.append({
+                "@search.action": "mergeOrUpload",
+                "id": hashlib.sha256(identity.encode("utf-8")).hexdigest(),
+                "content": text,
+                "content_vector": vector,
+                "source": field_codes_path.name,
+                "source_type": "json",
+                "page": None,
+                "sheet": metadata.get("sheet"),
+                "row_number": metadata.get("row_number"),
+                "chunk_number": 1,
+            })
+        print(f"   ✅ {field_codes_path.name}: {len(field_docs)} documents indexés")
+    else:
+        print(f"   ⚠️  Fichier non trouvé: {field_codes_path}")
+
+    # Process remaining JSON files (generic chunking)
     json_files = [
-        ("src/data/field_codes.json", "field_codes"),  # ← AJOUT: Codes de champs avec définitions
         ("src/data/dossiers.json", "dossier"),
         ("src/data/enregistrements.json", "enregistrement"),
+        ("src/data/evenements.json", "evenement"),
     ]
 
     for json_path, doc_type in json_files:

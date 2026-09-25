@@ -56,13 +56,14 @@ class RAGLoader:
             input=text
         ).data[0].embedding
 
-    def search_documents(self, query: str, top: int = 5) -> list[dict[str, Any]]:
+    def search_documents(self, query: str, top: int = 5, filter_expr: str | None = None) -> list[dict[str, Any]]:
         """
         Recherche hybrid (keyword + vector) dans Azure Search.
 
         Args:
             query: La requête utilisateur
             top: Nombre de résultats à retourner
+            filter_expr: Filtre OData optionnel (ex: "source eq 'field_codes.json'")
 
         Returns:
             Liste des documents trouvés avec score
@@ -85,6 +86,8 @@ class RAGLoader:
                     }
                 ],
             }
+            if filter_expr:
+                search_payload["filter"] = filter_expr
 
             # Effectuer la recherche
             url = f"{self.endpoint}/indexes/{self.index_name}/docs/search?api-version=2024-07-01"
