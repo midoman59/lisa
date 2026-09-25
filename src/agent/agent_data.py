@@ -9,6 +9,7 @@ import json
 from pathlib import Path
 from dotenv import load_dotenv
 from .rag_loader import RAGLoader
+from .improved_data_lookup import ImprovedDataLookup
 from openai import AzureOpenAI
 
 # Load environment
@@ -24,6 +25,7 @@ class DataAgent:
         self.loader = RAGLoader()
         self.field_descriptions = self._load_field_descriptions()
         self.field_codes = self._load_field_codes()
+        self.data_lookup = ImprovedDataLookup()
 
         # Initialize Azure OpenAI client
         self.client = AzureOpenAI(
@@ -105,6 +107,11 @@ class DataAgent:
         exact_match = self._exact_code_lookup(query)
         if exact_match:
             context += exact_match
+
+        # Lookup direct dans les données structurées (dpay, dgar, etc.)
+        direct_data = self.data_lookup.format_context(query)
+        if direct_data:
+            context += direct_data
 
         # Recherche séparée schéma (field_codes.json) vs données mock (dossiers/
         # enregistrements/evenements). Un classement unique fait perdre les
