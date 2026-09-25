@@ -48,6 +48,7 @@ htmlcov/
 # Azure
 .azure/
 azure_auth.json
+azure_search_credentials.json
 
 # Local data
 data/documents/*.pdf
