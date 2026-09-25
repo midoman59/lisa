@@ -2,7 +2,7 @@
 openai==1.3.0
 
 # Environment & Config
-python-dotenv==1.0.0
+python-dotenv==1.2.2
 
 # Data & Processing (for PDF extraction)
 pypdf==4.0.0
