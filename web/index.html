@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lisa | Loan Servicing</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <img class="sg-logo" src="/static/logo-societe-generale.png" alt="Société Générale">
+      <span>
+        <strong>LISA</strong>
+        <small>Loan Intelligence &amp; Servicing Assistant</small>
+      </span>
+    </div>
+    <nav class="topbar-nav" aria-label="Navigation principale">
+      <a class="active" href="/">Accueil</a>
+      <a href="#portfolio">Portefeuille</a>
+      <a href="#conversation">Assistant</a>
+    </nav>
+    <div class="topbar-meta"><span class="status-dot"></span> Environnement démo</div>
+  </header>
+
+  <main class="shell">
+    <section class="welcome">
+      <div>
+        <p class="eyebrow">ESPACE CRÉDIT</p>
+        <h1>Bonjour, comment puis-je vous aider ?</h1>
+        <p class="muted">Interrogez les dossiers LS V3.8.0 avec Lisa.</p>
+      </div>
+      <div class="welcome-card"><span class="welcome-icon">L</span><div><strong>Assistant crédit</strong><small>Vos dossiers, garanties et événements en un seul espace</small></div></div>
+    </section>
+
+    <section class="metrics" id="metrics" aria-label="Indicateurs">
+      <article class="metric-card"><span>Dossiers</span><strong id="total-dossiers">—</strong><small>Total</small></article>
+      <article class="metric-card"><span>Dossiers actifs</span><strong id="active-dossiers">—</strong><small>À suivre</small></article>
+      <article class="metric-card"><span>Encours accordé</span><strong id="total-amount">—</strong><small>EUR</small></article>
+      <article class="metric-card"><span>Événements</span><strong id="total-events">—</strong><small>Historique chargé</small></article>
+    </section>
+
+    <section class="workspace">
+      <aside class="panel dossiers-panel" id="portfolio">
+        <div class="panel-heading">
+          <div><p class="eyebrow">PORTEFEUILLE</p><h2>Dossiers récents</h2></div>
+          <span class="count" id="dossier-count">0</span>
+        </div>
+        <label class="search">
+          <span aria-hidden="true">⌕</span>
+          <input id="dossier-search" type="search" placeholder="Rechercher un dossier">
+        </label>
+        <div id="dossier-list" class="dossier-list"></div>
+      </aside>
+
+      <section class="panel chat-panel" id="conversation">
+        <div class="panel-heading">
+          <div><p class="eyebrow">ASSISTANT LISA</p><h2>Votre espace de travail</h2><p class="panel-subtitle">Posez une question sur un dossier, une garantie ou un événement.</p></div>
+          <span class="live-label"><span class="status-dot"></span>En ligne</span>
+        </div>
+        <div id="messages" class="messages" aria-live="polite">
+          <div class="message assistant">
+            <div class="avatar">L</div>
+            <div><span class="message-name">Lisa</span><p>Bonjour ! Je peux vous aider à comprendre les dossiers, les garanties et les événements.</p></div>
+          </div>
+        </div>
+        <div class="suggestions">
+          <button data-question="Combien de dossiers actifs avons-nous ?">Dossiers actifs</button>
+          <button data-question="Quelles garanties sont associées aux dossiers actifs ?">Garanties actives</button>
+          <button data-question="Quels sont les événements récents ?">Événements récents</button>
+          <button data-question="Donne-moi les détails du dossier LS-2024-001">Dossier LS-2024-001</button>
+        </div>
+        <form id="chat-form" class="composer">
+          <input id="question" autocomplete="off" placeholder="Posez votre question..." required>
+          <button type="submit" aria-label="Envoyer">Envoyer <span>↗</span></button>
+        </form>
+        <p id="error" class="error" hidden></p>
+      </section>
+    </section>
+  </main>
+  <footer>Lisa Demo · LS V3.8.0 · Interface locale</footer>
+  <script src="/static/app.js"></script>
+</body>
+</html>
