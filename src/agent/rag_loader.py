@@ -45,7 +45,7 @@ class RAGLoader:
         self.openai_client = OpenAI(base_url=base_url, api_key=openai_api_key)
         self.embedding_deployment = embedding_deployment
 
-        print(f"✓ RAGLoader initialisé (Hybrid Search)")
+        print(f"RAGLoader initialise (Hybrid Search)")
         print(f"  Endpoint: {self.endpoint}")
         print(f"  Index: {self.index_name}")
 
@@ -111,7 +111,7 @@ class RAGLoader:
             return documents
 
         except Exception as e:
-            print(f"⚠️  Erreur recherche: {e}")
+            print(f"Erreur recherche: {e}")
             return []
 
     def get_context_string(self, query: str, top: int = 5) -> str:

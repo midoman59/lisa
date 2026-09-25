@@ -3,54 +3,54 @@
     "id": "EVT001",
     "dossier_id": "DOS001",
     "enregistrement_id": "ENREG001",
-    "type_evenement": "DÉBLOCAGE",
-    "date_evenement": "2024-01-15",
-    "montant_evenement": 50000.00,
-    "description": "Déblocage initial du prêt"
+    "type_evenement": "DEBLOQUAGE",
+    "date_evenement": "20240115",
+    "montant_evenement": 50000.0,
+    "description": "Deblocage initial du pret"
   },
   {
     "id": "EVT002",
     "dossier_id": "DOS001",
     "enregistrement_id": "ENREG001",
     "type_evenement": "PAIEMENT",
-    "date_evenement": "2024-02-15",
+    "date_evenement": "20240215",
     "montant_evenement": 833.33,
-    "description": "Paiement mensuel - Échéance 1"
+    "description": "Paiement mensuel - Echeance 1"
   },
   {
     "id": "EVT003",
     "dossier_id": "DOS001",
     "enregistrement_id": "ENREG001",
     "type_evenement": "PAIEMENT",
-    "date_evenement": "2024-03-15",
+    "date_evenement": "20240315",
     "montant_evenement": 833.33,
-    "description": "Paiement mensuel - Échéance 2"
+    "description": "Paiement mensuel - Echeance 2"
   },
   {
     "id": "EVT004",
     "dossier_id": "DOS002",
     "enregistrement_id": "ENREG002",
-    "type_evenement": "DÉBLOCAGE",
-    "date_evenement": "2024-02-10",
-    "montant_evenement": 100000.00,
-    "description": "Déblocage initial du crédit revolving"
+    "type_evenement": "DEBLOQUAGE",
+    "date_evenement": "20240210",
+    "montant_evenement": 100000.0,
+    "description": "Deblocage initial du credit revolving"
   },
   {
     "id": "EVT005",
     "dossier_id": "DOS002",
     "enregistrement_id": "ENREG002",
     "type_evenement": "TIRAGE",
-    "date_evenement": "2024-02-20",
-    "montant_evenement": 25000.00,
-    "description": "Tirage partiel"
+    "date_evenement": "20240220",
+    "montant_evenement": 25000.0,
+    "description": "Tirage partiel du revolving"
   },
   {
     "id": "EVT006",
     "dossier_id": "DOS003",
     "enregistrement_id": "ENREG003",
     "type_evenement": "CLÔTURE",
-    "date_evenement": "2026-09-20",
-    "montant_evenement": 0.00,
-    "description": "Clôture du dossier après remboursement complet"
+    "date_evenement": "20260920",
+    "montant_evenement": 0.0,
+    "description": "Cloture du dossier apres remboursement complet"
   }
 ]
